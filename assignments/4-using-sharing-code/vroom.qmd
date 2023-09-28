@@ -1,0 +1,97 @@
+---
+jupyter: python3
+---
+
+# Designing a New Engine for the Anscombe Model 4
+
+The Anscombe Model 4 is a small, single-passenger electric vehicle introduced in 2019. One of the advantages of the design of this vehicle is its open specifications, which allows anyone to design and build improvements to any of its components. In this brief document, we describe experiments we carried out to test the power output of four alternative designs to the engine of the Model 4.
+
+In each of our experiments, we tested the power output of the engine in a real setting. We had our test driver apply varying amounts of force to the accelerator, ranging from around 4 to over 18 pounds (lbs) of force. We then measured the output of the engine in horsepower (hp).
+
+To ensure that the data processing works correctly and the plots display properly in this document, run the code cell below:
+
+```{python}
+import pandas as pd
+import matplotlib.pyplot as plt
+%matplotlib inline
+```
+
+Throughout this report, we will use the following function for consistency of plots:
+
+```{python}
+def make_results_plot(path, engine_type):
+    """
+    Plot CSV-formatted experimental results.
+    
+    Args:
+        path: A string representing the path to the CSV file.
+        engine_type: A string representing the engine type.
+    """
+    # Without header names, the first data point will be lost.
+    data_set = pd.read_csv(path, names=["Force", "Output"])
+    forces = data_set["Force"]
+    power_output = data_set["Output"]
+    
+    # Uncomment the next code line and modify to plot the data appropriately.
+    # Then delete these comment lines.
+    #plt.plot(FILL IN, FILL IN, ".")
+    
+    # In the following lines, replace the strings with appropriate labels.
+    plt.xlabel("X AXIS LABEL HERE")
+    plt.ylabel("Y AXIS LABEL HERE")
+    plt.title("PLOT TITLE HERE (USE AN F-STRING)")
+    plt.show()
+```
+
+## Design 1: Vibranium Cylinder Engine
+
+At the start of our experiments, we received a small quantity (around 100g) of vibranium from an anonymous donor. We used this vibranium in the cylinders of our engine. This design allows the engine to very efficiently transfer energy among the components, resulting in smooth acceleration and deceleration.
+
+We can see this smoothness clearly in the results of our experiment:
+
+```{python}
+# Plot the appropriate set of data here.
+```
+
+As the plot shows, the output of the engine increases nearly perfectly linearly as the force applied to the accelerator is increased, ranging from just over 5 hp to nearly 9 hp. At 13 lbs of force, the output of the engine jumped to nearly 13 hp, the cause of which we have not yet determined.
+
+## Design 2: Flux Capacitor Engine
+
+In our second design, we acquired a flux capacitor and used it as the central component. While flux capacitors can be difficult to optimize in an engine of this size, it is possible to get a higher output relative to accelerator force than would otherwise be possible.
+
+The results of our tests with this design shows this "sweet spot":
+
+```{python}
+# Plot the appropriate set of data here.
+```
+
+As the plot shows, the output of the engine steadily increases until about 11 lbs of force, and then *decreases* after that point. Of the experiments we carried out, this was one of the highest outputs we saw for an accelerator force in this range. That being said, our test driver reported that it would be significantly more difficult to hold the accelerator at this level for long periods of time, making this engine design not especially well-suited for longer trips.
+
+## Design 3: Palladium-Core Engine
+
+For our third design, we created a small arc reactor with a palladium core to power the engine. This design provides bursts of power to the engine that can be helpful for short boosts of rapid acceleration, at the cost of some stability in power output.
+
+The results of our tests show this instability in power output:
+
+```{python}
+# Plot the appropriate set of data here.
+```
+
+As the plot shows, the output of the engine varied significantly as the accelerator force was increased. While in some circumstances the power output of the engine was rather high (such as at 12 lbs), and while the relationship is *roughly* linear in the sense that the power output increases somewhat as the accelerator force is increased, we ultimately found that this design was too unstable for long-term use.
+
+## Design 4: Graphene-Based Engine
+
+For our final proposed design, we used strategically-placed graphene components in the engine to improve the thermal conductivity. This minimized the risks of overheating the engine, which in theory would allow us to apply far more accelerator force to obtain a much higher power output than would otherwise be possible.
+
+Our plot shows the results of our experiments, which as can be seen, were unfortunately cut short:
+
+```{python}
+# Plot the appropriate set of data here.
+```
+
+We began by testing the power output at 8 lbs repeatedly, which resulted in power outputs that varied rather widely. Our test driver then applied an accelerator force of 19 lbs, producing a rather high output of 12.5 hp. Unfortunately, in this test, another component of the engine malfunctioned, preventing us from doing any further testing.
+
+## Conclusions
+
+We learned a great deal from our redesigns, most notably that good engine design is rather difficult. While these ideas all seemed to work in theory, we ran into many problems in practice that would make widespread use of these engine designs difficult at best. Our most stable results seem to come from a vibranium-based engine, but the scarcity of this material makes mass production of this engine design infeasible for the time being.
+

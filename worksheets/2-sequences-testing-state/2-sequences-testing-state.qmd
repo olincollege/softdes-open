@@ -1,0 +1,517 @@
+---
+jupyter: python3
+execute:
+  enabled: false
+---
+
+# Worksheet 2
+
+In worksheet 2, you will try your hand at working with sequence types like
+lists, writing unit tests, and using state and stack diagrams to do some
+debugging.
+
+Before going on, don't forget to convert this `.qmd` over to `.ipynb`, open the
+Jupyter notebook, and run the following cell:
+
+```{python}
+import matplotlib.pyplot as plt
+%matplotlib inline
+```
+
+## 1. Fun with Lists
+
+In Reading 2, you learned about lists in Python. Here are a few questions and
+problems to help you get better acquainted with lists.
+
+### 1.1. Ordering in Lists
+
+Does order matter in lists? In other words, is the list
+`["Alice", "Bob", "Charlie"]` equal to `["Alice", "Charlie", "Bob"]`?
+
+In what circumstances would you want these two to be considered equal? In what
+circumstances would you not want them to be considered equal? (For these
+problems, you don't have to answer in terms of programming specifically - just
+listing applications or problems in which these two should or shouldn't be
+considered equal is fine.) Write your thoughts in the cell below:
+
+```markdown
+_write your thoughts here_
+```
+
+### 1.2. List Palindromes
+
+In the cell below, implement the function `is_palindrome`, which checks whether
+or not a list is a palindrome or not.
+
+```{python}
+def is_palindrome(iterable):
+    """
+    Check whether or not a list is a palindrome (i.e., has the same sequence
+    of values forwards or backwards).
+
+    Args:
+        iterable: A list to check.
+
+    Returns:
+        True if iterable is a palindrome, and false otherwise.
+    """
+    # Replace this line and your code with the implementation.
+    pass
+```
+
+There are at least two significantly different ways to implement this function.
+Try writing this function both ways, or discussing with your classmates to
+compare the pros and cons of each approach.
+
+### 1.3. List of Characters
+
+In the cell below, implement the function split_into_characters, which takes a
+string and turns it into a list of its characters, in order. (If you know the
+`split` function, you should not use it here.)
+
+```{python}
+def split_into_characters(text):
+    """
+    Split a string into a list of characters.
+
+    Args:
+        text: A string representing the text to split into characters.
+
+    Returns:
+        A list of one-character strings representing the letters of text, in
+        order.
+    """
+    # Replace this line and your code with the implementation.
+    pass
+```
+
+As with the palindromes exercise, there are several ways to do implement this
+function. We encourage you to try multiple ways for yourself or compare your
+approach with those of your classmates.
+
+## 2. Fizzbuzz
+
+With just two weeks of SoftDes under your belt, you already have enough
+knowledge of Python to tackle a common programming interview problem called
+FizzBuzz. This is based on the children's game of the same name, where players
+take turns counting upwards. As they do so, if the number they are counting is
+divisible by 3 (such as 9), they say "Fizz" instead of the number, and if it is
+divisible by 5 (such as 10), they say "Buzz" instead. If the number is divisible
+by both 3 and 5 (such as 15), they say "Fizz Buzz" instead of the number. In
+this problem, you will write a function that plays this game by itself, printing
+out the numbers or some combination of the words "Fizz" and "Buzz" as it counts
+up.
+
+Below, you will find the start of a function called `fizzbuzz` that prints out
+the first $n$ numbers (starting at 1) in the style of a Fizz Buzz game, with one
+number per line. The function should count up from 1 to $n$ **inclusive**, and
+for each number should do the following:
+
+- If the number isn't divisible by 3 or 5, just print the number.
+- If the number is divisible by 3 and not 5, print `Fizz`.
+- If the number is divisible by 5 and not 3, print `Buzz`.
+- If the number is divisible by both, print `FizzBuzz`.
+
+Be sure to write a docstring with your function.
+
+```{python}
+def fizzbuzz(n):
+    """
+    Replace this line with your docstring
+    """
+    pass
+```
+
+Once you have implemented this function, you can check that it is behaving
+roughly as you expect by running the testing cell below. For example, running
+`fizzbuzz(15)` should print out **exactly** the following:
+
+```
+1
+2
+Fizz
+4
+Buzz
+Fizz
+7
+8
+Fizz
+Buzz
+11
+Fizz
+13
+14
+FizzBuzz
+```
+
+```{python}
+# Feel free to change the following line as needed for testing.
+fizzbuzz(15)
+```
+
+### Challenge: More Efficient FizzBuzz
+
+If you have written the function above with four conditional statements (`if`,
+`elif`, or `else`), try to challenge yourself and see if you can write it with
+three. With a bit of cleverness, you can come up with some neat techniques to
+implement this function a bit more cleanly than using conditional statements for
+each possible case. This may help for the next problem in this worksheet as
+well. (There are multiple ways to write this function with three conditionals,
+all of which have some element of cleverness, so do some exploring and see what
+you can come up with!)
+
+## 3. Making Raindrops
+
+For this next problem, we will try a slightly more complex version of the
+FizzBuzz problem called the raindrops problem. Here, your job is to write a
+function called `raindrop` that behaves similarly to `fizzbuzz`. Specifically,
+`raindrops(n)` counts up from 1 to `n` inclusive, and for each number, prints
+the following:
+
+- If the number isn't divisible by 2, 3, or 5, just print the number.
+- If the number is divisible by just 2 (not 3 or 5), print `Pling`.
+- If the number is divisible by just 3, print `Plang`.
+- If the number is divisible by just 5, print `Plong`.
+- If the number is divisible by just 2 and 3 (not 5), print `PlingPlang`.
+- If the number is divisible by just 3 and 5, print `PlangPlong`.
+- If the number is divisible by just 2 and 5, print `PlingPlong`.
+- If the number is divisible by 2, 3, and 5, print `PlingPlangPlong`.
+
+In this problem, you will not only write this function using your previous
+`fizzbuzz` implementation as a starting point, but also work on maintaining code
+and trying some new features.
+
+### 3.1. From FizzBuzz to Raindrops
+
+Note that in the description of `raindrops` above, there are 8 different cases
+to consider. While it is possible to implement the function using 8 different
+conditional statements (`if`, `elif`, or `else`), there are ways to do so with
+far fewer conditional statements. As you do this part of the problem, you are
+encouraged to think of possible ways to keep your function on the simpler side.
+
+This time, we will try implementing the function in a `.py` file. In the file
+`clouds.py`, you will find the function called `raindrops`. Implement your
+function there. Feel free to use your previous implementation for `fizzbuzz` as
+a starting point. You should also write a docstring for your function.
+
+You can test your code here:
+
+```{python}
+from clouds import raindrops
+
+raindrops(42)
+```
+
+### 3.2. Functional Raindrops
+
+So far, we have seen a number of types that data can have - integers are `int`s,
+strings are `str`s, and lists are `list`s, for example. But a variable can also
+be a `function`, so if you have already run the `fizzbuzz` cell above, you can
+see that the following cell reports `fizzbuzz` to be a function.
+
+```{python}
+type(fizzbuzz)
+```
+
+You can use `fizzbuzz` and other `function`s like you would any other variable.
+This means that you can pass them to functions that take `function`s as a
+parameter type, and even return them from functions. Here, we will try writing a
+function that returns a `function`.
+
+To do this, we will use what is called an _inner function_. Essentially, you
+will define a function within the function, like this:
+
+```python
+def make_adder(add_value):
+    """
+    Create and return a function that adds a certain value to its input.
+
+    Args:
+        add_value: A number (int or float) representing the number to add.
+
+    Returns:
+        A function that takes a number as input and return that number plus
+        add_value.
+    """
+    def adder(num):
+        """
+        Return a number plus some value defined outside of the function.
+
+        This function is intended to be created within another function, and
+        thus uses a value defined outside of its body (add_value). Given its
+        input, add add_value to the input and return it.
+
+        Args:
+            num: A number to add to.
+
+        Returns:
+            The value of num plus add_value.
+        """
+        return num + add_value
+    return adder
+```
+
+So an inner function looks essentially identical to a function, except that it
+is defined within the body of another function. The inner function can use
+values defined outside of it, like `add_value` in the example above. Then, the
+entire function can be returned by its name (`return adder`). It can then be
+used in code as normal, like this:
+
+```python
+add_42 = make_adder(42)
+add_42(21)  # Returns 63
+```
+
+Notice that this allows us to make many functions that behave in a similar way.
+We can do the same with the `raindrops` function, passing three integers to be
+associated with `Pling`, `Plang`, and `Plong`, respectively.
+
+In the `clouds.py` file, you will find a function called `make_raindrops`.
+Implement the function there using an inner function.
+
+```{python}
+from clouds import make_raindrops
+
+custom_raindrops = make_raindrops(3, 5, 7)
+custom_raindrops(10)
+```
+
+## 4. Test your Knowledge
+
+In this problem, let's look back at a few functions we wrote earlier and think
+about how we might go about testing them. We will not be writing actual tests in
+this problem, but we will think about test cases that we could use to check that
+our function implementations are behaving as expected.
+
+### 4.1. `is_palindrome`
+
+As you may remember, `is_palindrome` takes an iterable and returns `True` if the
+iterable is the same forwards and backwards, and `False` otherwise. Below, write
+some test cases that would help you determine if an implementation of this
+function is correct. So for example, you might write something like
+"`is_palindrome([1, 2, 1])` should return `True`".
+
+```markdown
+Solution:
+
+(Write your solution here.)
+```
+
+### 4.2. `fizzbuzz`
+
+As you may remember, `fizzbuzz` takes an integer as input and prints the
+FizzBuzz sequence from 1 to that number. Below, write some test cases that would
+help you determine if an implementation of this function is correct.
+
+```markdown
+Solution:
+
+(Write your solution here.)
+```
+
+### 4.3. `make_raindrops`
+
+As you may remember, `make_raindrops` takes three integers as input and returns
+a function that prints the raindrop sequence from 1 to that number, but using
+the three integers in place of the usual 2, 3, and 5. Below, write some test
+cases that would help you determine if an implementation of this function is
+correct.
+
+```markdown
+Solution:
+
+(Write your solution here.)
+```
+
+## 5. List à la Mode
+
+In this problem, you will be exploring unit testing through the problem of
+finding the _mode_ of a list - the element that occurs most frequently. In doing
+so, you will get the chance to practice _test-driven development_, a workflow
+sometimes used in software engineering.
+
+### 5.1. Unit Testing Mode
+
+In test-driven development, you write unit tests _before_ you write your actual
+code. In the file `test_list_mode.py`, you will find some starter code for your
+unit tests, as well as one unit test to get you started. Open this file in
+VSCode.
+
+Add at least four more substantially different tests (i.e., testing for
+different things, rather than testing effectively the same behavior with
+different lists), with each test being one function. Remember that each function
+should have a name that starts with `test_` to make sure that Pytest finds it
+automatically.
+
+In each function's docstring, write what your unit testing is checking for (this
+can be brief).
+
+As you go through this process, you may find yourself asking questions about
+what the function should return in specific situations. Feel free to discuss
+these questions with those you are working with, or to argue what the function
+should return and why.
+
+### 5.2. Implementation Mode
+
+If you run your unit tests now, you should find that most of all of them fail.
+This is to be expected - you haven't written any code yet!
+
+Now you can fix that - in the `list_mode.py` file, you should see a function to
+implement. Fill in the implementation for this function, adjusting your code as
+necessary until the unit tests you wrote in the earlier section pass.
+
+As with the other functions you have seen in this worksheet, there are multiple
+ways that you can implement this function, though the assumptions you made as
+you wrote your unit tests may affect which of these specific ways can work. You
+may find that the
+[List Methods](https://softdes.olin.edu/docs/readings/2-sequences-testing-state/#list-methods)
+section of Reading 2 is helpful as you write your function.
+
+### 5.3. Discussion/Reflection
+
+On your own or with a few others, discuss the following questions:
+
+1. When writing unit tests, what assumptions did you make about the behavior of
+   `mode`? How did these assumptions affect your design or implementation of
+   `mode`?
+2. Are there any cases or behaviors in `mode` that you feel you did not cover
+   with your unit tests? If so, what unit tests might you add?
+3. How certain are you that your implementation is correct? Why or why not?
+
+Write your thoughts on these questions in the cell below.
+
+```markdown
+_write your thoughts here_
+```
+
+## 6. Sorting Things Out
+
+Sorting lists of integers is a common problem in introductory computing courses,
+as it highlights different ways of approaching a rather simply stated problem.
+There are many known sorting algorithms today, each with their own tradeoffs
+among specific cases, performance requirements, and ease of understanding. If
+you want to spend the next few minutes being mesmerized by visualizations of
+various sorting algorithms, take a look at this
+[GIF album](https://imgur.com/gallery/voutF) on Imgur.
+
+Now that your life is a bit more colorful than it was a few minutes ago, let's
+consider a related problem: how do you check whether or not a list is already
+sorted? One way to do this is as follows: make a copy of the list and sort it.
+If this now-sorted copy of the list is identical to the original, then the list
+must have been sorted to begin with. In this problem, you will spend a bit of
+time testing and exploring an implementation of this approach in Python.
+
+### 6.1. A Strange Sort of Test
+
+The file `sort_check.py` contains an implementation of the previous approach to
+checking whether a list is sorted, and the file `test_sort_check.py` contains a
+unit test to check the `is_sorted` function.
+
+In the `test_sort_check.py` file, add at least three additional unit tests that
+are reasonably different from each other. Make sure that each test function has
+a name beginning with `test_` and has a docstring that briefly explains what is
+being tested.
+
+### 6.2. The State (and Stack) of Affairs
+
+If you haven't done so already, run your unit tests and see what results you
+get. If you have written a wide enough range of unit tests, you should have at
+least one failing test.
+
+If you take a look at your unit tests' failure messages, you should see
+something peculiar - `is_sorted` always returns `True`. Something is going on,
+but what?
+
+To find this out, you should try constructing a state/stack diagram for this
+function as it runs. You can do this by loading your code into
+[Python Tutor](http://pythontutor.com/) and trying it with a test case, or you
+can track the state of the function manually, using a pen and paper or some
+note-taking system on your machine. While using Python Tutor is almost certainly
+faster, learning to track program state manually is a valuable skill (especially
+if you learn a language without the equivalent of a tool like Python Tutor).
+
+Once you have explored the state of the function and determined the cause of the
+error, report your findings in the cell below. If you can, take a screenshot of
+your state/stack diagram at a point in the code's execution that highlights the
+error, and include it in your solution.
+
+```markdown
+_write your thoughts here_
+```
+
+## 7. The Collatz Conjecture
+
+The Collatz conjecture is an unsolved problem in mathematics that is somewhat
+surprising. The problem statement is short and to the point, but there is no
+known conclusive proof for an answer one way or another.
+
+The problem focuses on the _Collatz sequence_, which goes as follows:
+
+1. Pick any positive integer $n$.
+2. If the number $n$ is even, divide it by two. If $n$ is odd, triple it and add
+   one.
+3. Use the result as the new value of $n$, and repeat step 2.
+
+It seems likely that for any positive integer $n$, this sequence will eventually
+reach a value of 1, but this has not been proven. There has been a great deal of
+interest in how many "steps" this sequence takes to reach 1 for different
+numbers, however. In this problem, you will write a bit of code to explore the
+oddities of the Collatz conjecture in more detail.
+
+### 7.1. Implement the Collatz Sequence
+
+To start, implement the function `collatz` below, which follows the three steps
+above until it reaches 1, and counts the number of "steps" (i.e., the number of
+times that n is changed) until it arrives at 1.
+
+```{python}
+def collatz(n):
+    """
+    Calculate the number of steps in the Collatz sequence for the given number.
+
+    Args:
+        A positive integer representing the number of start from.
+
+    Returns:
+        An int representing the number of times the value of n is changed
+        before arriving at 1.
+    """
+    pass
+```
+
+### 7.2. The Plot Thickens
+
+Once you have implemented this function, you can create some neat plots of how
+many steps various numbers take.
+
+To do this, we have provided some helper code. In the cell below, first replace
+the indicated line to create a list of how many "steps" each starting value
+takes in the Collatz sequence to reach 1.
+
+Then, try adjusting `test_values` to your liking, and run the cell to generate
+your very own plot. (Try not to immediately set the list to a huge set of
+numbers, as this may cause your machine or VM to run rather slowly.) Once you
+have tried a few plots of your own, feel free to take a look at the
+[Wikipedia page](https://en.wikipedia.org/wiki/Collatz_conjecture) for the
+Collatz conjecture, which contains various visualizations related to this
+interesting problem.
+
+```{python}
+# Define your set of inputs below.
+test_values = list(range(1, 11))
+
+# Get the number of steps in the Collatz sequence for each number.
+collatz_steps = test_values  # Replace this line with your code.
+
+# Helper code. Don't change this.
+plt.plot(test_values, collatz_steps, ".")
+plt.xlabel("Starting value")
+plt.ylabel("Number of steps to 1")
+```
+
+## 8. Submission
+
+Once you're done with the worksheet, you can go ahead and submit! Convert your
+`.ipynb` file back to a `.qmd` file (**be very careful to run `quarto convert`
+on your `.ipynb` file or you will lose work**), then add and commit the `.qmd`
+file.

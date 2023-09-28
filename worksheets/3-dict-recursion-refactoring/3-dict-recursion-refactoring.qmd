@@ -1,0 +1,513 @@
+---
+jupyter: python3
+execute:
+  enabled: false
+---
+
+# Worksheet 3: Dictionaries, Recursion, and Refactoring
+
+In this worksheet, you will get the chance to practice creating and manipulating
+dictionaries, implementing functions using a recursive approach, and refactoring
+code to implement more efficient ways to produce the same outputs from the same
+inputs.
+
+## 0. Setup
+
+As usual, you should convert the `.qmd` file to `.ipynb` before proceeding.
+
+Then, order to make some parts of this worksheet work properly, make sure you
+run the code cell below and every time you restart the notebook or kernel.
+
+```{python}
+%load_ext autoreload
+%autoreload 2
+```
+
+## 1. Dictionaries for Mad Libs
+
+In this problem, you will get to practice a bit of your skills with dictionaries
+in Python, and use your skills to generate a fun Mad Libs story.
+
+### 1.1. Let Me Give You Some Input
+
+Before we set off implementing Mad Libs, you should become familiar with the
+[`input` function](https://docs.python.org/3/library/functions.html#input),
+which is used to get text data from the user.
+
+If you run the cell below, you should see a text box appear either below the
+cell (in the standard Jupyter interface) or at the top of your window (in VS
+Code):
+
+```{python}
+favorite_num = input("What is your favorite number? ")
+```
+
+If you then run the next cell, you should see that the input you gave earlier
+has been assigned to `favorite_num`:
+
+```{python}
+print(f"Your favorite number is {favorite_num}")
+```
+
+You may notice that there is no checking done on your input - in other words,
+even if you did not actually type a number into the prompt, the previous cell
+will print out whatever you typed. This means that if you need the input in a
+certain format, you need to check for that in your code, and take the necessary
+steps to fix any errors (like prompting the user for input again).
+
+### 1.2. Itemizing the Mad Libs
+
+Start by running the cell below, which imports a dictionary that will be used
+for a small sample mad lib.
+
+```{python}
+from mad_libs import MAD_LIBS_DICT
+```
+
+The dictionary `MAD_LIBS_DICT` will store the words used in your sample mad lib.
+In the cell below, write the format of this dictionary. Be specific: your answer
+should state what type is mapped to what type, as well as what the data in that
+type stands for. (Note that for now, all of the values will be blank strings.)
+Feel free to write code as necessary in the cell above to work out the format of
+the dictionary.
+
+```markdown
+Solution:
+
+(write your answer here)
+```
+
+### 1.3. Let's Be Prompt
+
+To get and process input from the user, you should write a function called
+`mad_lib_prompt`. It should take as input a key as you would find in
+`MAD_LIBS_DICT`, and use `input` to prompt the user for the appropriate part of
+speech. For example, if the part of speech is a noun, the `input` prompt should
+be `Enter a noun: ` (note the space afterwards). The function should then return
+the string it read, but with all characters changed to uppercase. Fortunately,
+you can change a string to all uppercase using the [`upper`
+function](https://docs.python.org/3/library/stdtypes.html#str.upper), like this:
+`"foo".upper()`.
+
+In the cell below, write your function.
+
+```{python}
+def mad_lib_prompt(dict_key):
+    """
+    Write a docstring here.
+    """
+    pass
+```
+
+### 1.4. Ad`dict`ed to Mad Libs
+
+Now, you should write a function called `enter_mad_libs`. This function takes as
+input a dictionary called `mad_libs_dict` and returns nothing. For each key in
+`mad_libs_dict`, the function should prompt the user for the correct part of
+speech and use the user's input to set the value for that key in
+`mad_libs_dict`. As an example, suppose that `mad_libs_dict` looked like this:
+
+```python
+{(0, "number"): "", (1, "plural noun"): ""}
+```
+
+Then after running `enter_mad_libs`, `mad_libs_dict` might look like this:
+
+```python
+{(0, "number"): "99", (1, "plural noun"): "LUFTBALLONS"}
+```
+
+In the cell below, write your function.
+
+```{python}
+def enter_mad_libs(mad_libs_dict):
+    """
+    Write a docstring here.
+    """
+    pass
+```
+
+### 1.5. `f`ind and Replace
+
+Once you have the function to fill in a mad libs dictionary, you should write a
+function called `generate_story`. This function takes a string called
+`mad_libs_story` and a dictionary called `mad_libs_dict` and returns a string.
+The `mad_libs_story` string represents a template of the mad libs text with its
+blanks specially marked, like this:
+
+```
+You have <0-number> <1-plural noun>?!
+```
+
+For this text, the `mad_libs_dict` variable would look the same as in the
+previous example:
+
+```python
+{(0, "number"): "", (1, "plural noun"): ""}
+```
+
+Your `generate_story` function should prompt the user for input on each of the
+blanks in `mad_libs_dict`, and then substitute the user's input into the
+appropriate blanks in `mad_libs_story`. The function should then return this
+string, representing a completed mad libs story.
+
+To replace a part of a string, you can use the
+[`replace` function](https://docs.python.org/3/library/stdtypes.html?highlight=replace#str.replace).
+For example, running `"New York".replace("York", "Jersey")` returns the string
+`"New Jersey"`.
+
+In the cell below, write your function.
+
+```{python}
+def generate_story(mad_libs_story, mad_libs_dict):
+    """
+    Generate a complete madlibs story by replacing text of format <index-"part of speech">
+    matching provided dictionary's keys with associated values.
+
+    Args:
+        madlibs: Dictionary of madlibs to be entered keyed on tuples of
+        (index, "part of speech")
+        madlibs_story: String containing madlibs story with placeholders for entries
+
+    Returns:
+        String with complete generated madlibs story
+    """
+    pass
+```
+
+Once you have written your function, you can test it out by running the cell
+below.
+
+```{python}
+sample_story = "You have <0-number> <1-plural noun>?!"
+sample_dict = {(0, "number"): "", (1, "plural noun"): ""}
+print(generate_story(sample_story, sample_dict))
+```
+
+### 1.6. Generate Mad Libs
+
+Now you are ready to generate your mad lib. Running the cell below will prompt
+you to fill in 16 blanks of various parts of speech, one at a time. Once you
+have done this, the story will be displayed. Run the cell to get started:
+
+```{python}
+import textwrap
+from mad_libs import MAD_LIBS_STORY, MAD_LIBS_DICT
+
+# Generate and print the story, wrapping text for readability.
+TEXT_WIDTH = 72
+story = generate_story(MAD_LIBS_STORY, MAD_LIBS_DICT)
+print(textwrap.fill(story, width=TEXT_WIDTH))
+```
+
+## 2. Recursion Practice
+
+The following exercises will provide practice in implementing recursive
+functions. Remember to start by imagining the simple base case that will solve
+your problem. Once you have a base case, think of how to break the problem down
+into smaller versions. (See the
+[Recursion section in Reading 3](https://softdes.olin.edu/docs/readings/3-function-design-problem-solving/#recursion)
+for a refresher of this process.)
+
+### 2.1. Palindromes
+
+In the file `recursive_palindrome.py`, fill in the function
+`is_palindrome(string)`, which takes a string and returns `True` if it a
+palindrome (the same backwards and forwards) and `False` otherwise.
+
+Remember that if a palindrome is the same backwards and forwards, its first and
+last characters should be the same. This may help you determine your base case
+and recursive case.
+
+Once complete, you can run the cell below to test your code.
+
+```{python}
+import recursive_palindrome
+
+# This should return True for "ABBA"
+recursive_palindrome.is_palindrome("ABBA")
+```
+
+### 2.2 Exponentiation
+
+In the file `recursive_power.py`, fill in the function `power(x, n)`. This
+function takes two integers, `x` and `n` and returns `x` to the `n`th power, or
+`x ** n`. You can assume that `n` will not be negative. Rather than simply doing
+this with the built-in Python operators, however, you will be doing this
+recursively.
+
+Here, it will help to be a bit careful about your base case, since there are a
+few options that sound plausible, but some will not result in correct solutions.
+When you write your recursive case, you may also want to take care, since you
+now have two function parameters to deal with.
+
+Once complete, you should add your own `import` statement below to test your
+code. Use the way the function call is written to determine what type of
+`import` to use.
+
+```{python}
+# Add your import statement here
+
+# This should return 64 for (4, 3)
+recursive_power.power(4, 3)
+```
+
+### 2.3. Factorial
+
+In the file `recursive_factorial.py`, fill in the function `factorial(n)`. This
+function takes a single positive integer and returns the factorial of the
+number.
+
+Remember that a factorial of a number `n`, written $n!$ in mathematics, is
+product of all of the numbers from 1 to `n`. So $3! = 3 \times 2 \times 1 = 6$,
+and $5! = 5 \times 4 \times 3 \times 2 \times 1 = 120$.
+
+Your solution must be written recursively, so `factorial` should call itself at
+some point.
+
+Once complete, you can run the cell below to test your code:
+
+```{python}
+from recursive_factorial import factorial
+
+# This should return 120
+factorial(5)
+```
+
+### 2.4. Reverse List
+
+In the file `tsil.py`, fill in the function `reverse_list(any_list)`, which
+takes a list containing any sequence of items and returns a reversed copy of the
+list.
+
+The procedure for determining your base case and recursive case should be
+similar to the previous problems, but what you do with the recursive call
+afterwards might look slightly different.
+
+Once complete, you can run the cell below to test your code.
+
+```{python}
+from tsil import reverse_list
+
+# This should return [True, "apple", 1] for [1, "apple", True]
+reverse_list([1, "apple", True])
+```
+
+## 3. Inner Functions
+
+An inner function is a definition of a function within a function. This may seem
+strange, but it can be a useful construct: you can create functions that have
+their own parameters and return values, but can also access variables in their
+outer functions. Here is an example (docstrings omitted):
+
+```python
+def make_adder(add_value):
+    def add(num):
+        return num + add_value
+    return add
+```
+
+The outer `make_adder` function takes a single parameter `add_value` that can be
+accessed by the inner function `add`, even though it is not a parameter of
+`add`. That, in turn, allows us to easily create many functions that add a value
+to their input. While this seems like a simple example without much use, this
+technique can come in handy. In this problem, you will practice writing a few
+inner functions.
+
+### 3.1. Sales Tax
+
+Sales tax rates can vary from state to state, and even by municipality or
+category of item. Because of this, it can be helpful to create a variety of
+functions that can apply different sales tax rates to a price.
+
+In the cell below, you will see the starter code for a function `make_sales_tax`
+that takes a sales tax rate like `0.095` (reprsenting 9.5%) and returns a
+_function_ that adds that amount of sales tax onto a price. For example,
+`make_sales_tax(0.095)` should return a function that for input 100, would
+return 109.5.
+
+Implement your function in the cell below.
+
+```{python}
+def make_sales_tax(tax_rate):
+    pass
+```
+
+### 3.2. Function Composition
+
+Suppose you have two functions, `f` and `g`:
+
+```python
+def f(x):
+    return x + 1
+
+
+def g(x):
+    return 2 * x
+```
+
+You can call these functions separately: `f(42)` would return 43, and `g(42)`
+would return 84. But you can also call `f(g(42))`, which will first evaluate
+`g(42)` (yielding 84), and call `f` on that result (`f(84)`), yielding 85.
+
+Rather than always calling `f(g(x))`, you can instead do function composition,
+which creates a new function that applies `g`, then `f` to any input.
+
+In the cell below, you will see the starter code for a function `compose` that
+takes two functions `f` and `g`. Each of these functions takes a single
+numerical input and returns a number. Implement `compose` so that it returns a
+function representing the composition of `f` then `g` - in other words, for any
+numerical input `x`, `compose` returns a function that will compute `f(g(x))`.
+
+Implement your function in the cell below.
+
+```{python}
+def compose(f, g):
+    pass
+```
+
+## 4. The Search for Refactoring
+
+Sometimes, code that barely works is good enough to move on from. But left for
+long enough, code that just barely works can lead to slow performance or
+difficulty in understanding or maintaining the code. When this happens, you
+sometimes need to refactor your code, that is, improve it without changing its
+externally visible behavior.
+
+Often times, code in need of refactoring is part of a published software library
+or larger software project. This means that many other functions may depend on
+this code taking certain parameters or returning certain values. Because of
+this, when you refactor code, you should not change things like parameter types
+or return types. However, within the body of a function you are refactoring, you
+can change any code you want to improve its performance or maintainability.
+
+In this problem, you will try refactoring a couple functions that we have made
+for you. These functions both implement a search algorithm, taking a list of
+numbers and a target number, and returning where in the list the target number
+occurs, if it occurs at all.
+
+### 4.1. Linear Search
+
+Below is a starter implementation for a linear search algorithm. It searches a
+list `num_list` for `target_num`, and returns the index where `target_num` first
+occurs. If `target_num` is not in `num_list` at all, `linear_search` returns
+`None`. So for example, `linear_search([1, 2, 2, 3], 2)` returns `1` and
+`linear_search([1, 2, 2, 3], 42)` returns `None`.
+
+Change the implementation in the cell below to be more efficient or readable.
+You are allowed to change any variable names (except for the function name), as
+well as any of the implementation, as long as the function continues to work
+correctly. If you choose, you can also implement the function recursively, as
+long as you keep it as a linear search algorithm (i.e., it checks each item in
+the list sequentially). Note that while you cannot change the types of the
+parameters or return value of the function, you can define additional functions
+outside of `linear_search` and call them from the body of `linear_search`.
+
+(If you need it, the `search.py` file contains the original implementation of
+`linear_search`.)
+
+```{python}
+def linear_search(num_list, target_num):
+    """
+    Find the index where a target number occurs in a list.
+
+    Given a list of numbers and a target value, return the first index where the
+    target number is found, or None otherwise.
+
+    Args:
+        num_list: A list of numbers (ints or floats) representing the list to
+            search in.
+        target_num: An int or float representing the value to search for.
+
+    Returns:
+        An int representing the first index where target_num occurs, or None if
+        target_num is not in num_list.
+    """
+    index = 0
+    num_list_length = len(num_list)
+    while index < num_list_length:
+        current_value = num_list[index]
+        if current_value == target_num:
+            return index
+        next_index = index + 1
+        index = next_index
+    return None
+```
+
+After you have changed the implementation, describe the changes you made and why
+in the cell below.
+
+```markdown
+Solution:
+
+(Write your answer here)
+```
+
+### 4.2. Binary Search
+
+Below is a starter implementation for a binary search algorithm. Like the
+previous implementation, it searches a list for a target number, but this time,
+the function assumes that the list is sorted. This means that the function can
+be a bit more efficient than with the linear search, eliminating half of the
+list at every step.
+
+As in the previous example, `binary_search([1, 2, 2, 3], 2)` should return `1`
+and `binary_search([1, 2, 2, 3], 42)` should return `None`.
+
+Change the implementation in the cell below to be more efficient or readable.
+You are allowed to change any variable names (except for the function name), as
+well as any of the implementation, as long as the function continues to work
+correctly. If you choose, you can also implement the function recursively, as
+long as you keep it as a binary search algorithm (eliminating half of the list
+each step). Note that while you cannot change the types of the parameters or
+return value of the function, you can define additional functions outside of
+`binary_search` and call them from the body of `binary_search`.
+
+(If you need it, the `search.py` file contains the original implementation of
+`binary_search`.)
+
+```{python}
+def binary_search(num_list, target_num):
+    """
+    Find the index where a target number occurs in a list.
+
+    Given a list of numbers and a target value, return the first index where the
+    target number is found, or None otherwise. Use a binary search algorithm,
+    assuming that the list is sorted.
+
+    Args:
+        num_list: A list of numbers (ints or floats), assumed to be sorted from
+            least to greatest, representing the list to search in.
+        target_num: An int or float representing the value to search for.
+
+    Returns:
+        An int representing the first index where target_num occurs, or None if
+        target_num is not in num_list.
+    """
+    lo = 0
+    hi = len(num_list)
+    while lo < hi:
+        mid = lo + (hi - lo) // 2
+        if num_list[mid] == target_num:
+            return mid
+        if target_num < num_list[mid]:
+            hi = mid
+        else:
+            lo = mid + 1
+    return None
+```
+
+After you have changed the implementation, describe the changes you made and why
+in the cell below.
+
+```markdown
+Solution:
+
+(Write your answer here)
+```
+
+## 5. Submission
+
+When you are done, submit the worksheet in the usual way. Be sure to include any
+`.py` files you changed. Be careful when converting back from `.ipynb` to `.qmd`
+to ensure that you do not lose any work.

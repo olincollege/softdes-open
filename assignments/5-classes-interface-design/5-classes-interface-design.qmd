@@ -1,0 +1,286 @@
+---
+jupyter: python3
+execute:
+  enabled: false
+---
+
+# Assignment 5: Classes and Interface Design
+
+In this assignment, you will get some practice with designing and implementing
+classes.
+
+To ensure that the code you run in this notebook uses the latest version of
+your code, run the following cell each time you start or restart your notebook:
+
+```{python}
+%load_ext autoreload
+%autoreload 2
+```
+
+## 1. A Cure for your Board-om
+
+Classes are particularly useful for implementing games. You can use a class to
+manage the "state" of a game, such as the pieces on a board and whose turn it
+is. You can also use a class to define the ways in which this state can change,
+such as a legal move or some event that occurs.
+
+In this exercise, you will get a bit of an idea of how to use such a class for
+a simple game: tic-tac-toe. You should have already started to think about the
+design of this class in Worksheet 5, and you are free to use your ideas from
+the worksheet to help you in this problem.
+
+The `tic_tac_toe.py` file contains a class called `TicTacToeBoard` for you to
+fill in. This class has several methods for you to implement:
+
+* `__init__()` creates an empty tic-tac-toe board. The data structure you use
+  to store the contents of the board is up to you.
+* `next_move()` returns a string equal to the next player to move, `X` or
+  `O`. We use `X` as the first player, so with an empty board, `X` moves
+  first. How you do this is up to you (e.g., you can calculate the next player
+  on the fly, or store that as an instance attribute).
+* `mark(row, col)` takes a row index and column index and attempts to place the
+  next player's mark (`X` or `O`) in the appropriate row and column. Row and
+  column indices start at 0, so the top row of the board would be Row 0 and
+  Columns 0, 1, and 2, respectively. If the space already has a mark in it,
+  then the function should execute the statement `raise ValueError` instead,
+  which will cause an error to occur.
+* `get_square(row, col)` takes a row and column index and returns the symbol of
+  the player (`X` or `O`) at that square of the board. If neither player has
+  marked that square, this function should return a space (` `).
+* `check_win(player)` checks whether a player has won or not. The `player`
+  parameter is a string `X` or `O`, and the function returns `True` if that
+  player has three in a row anywhere on the board and `False` otherwise. Feel
+  free to use helper functions, such as ones that will check whether a player
+  has won in a specific way (such as in a row of the board).
+* `__repr__()` returns a string that represents the board with the appropriate
+  spaces filled in (see example below). Use the string `+-+-+-+` to denote
+  boundaries between rows and `|` to denote boundaries between columns.
+
+If your code has been implemented successfully, then running the code cell
+below should produce the string shown below. (Remember that your code also
+needs to pass the unit tests.)
+
+```
++-+-+-+
+|X|O| |
++-+-+-+
+| |O| |
++-+-+-+
+| | |X|
++-+-+-+
+```
+
+```{python}
+from tic_tac_toe import TicTacToeBoard
+
+board = TicTacToeBoard()
+board.mark(0, 0)
+board.mark(1, 1)
+board.mark(2, 2)
+board.mark(0, 1)
+print(board)
+```
+
+Beyond this, the way you design the details of your class is up to you. The
+state of the board can be stored using whatever data structure you choose, and
+you can keep track of any other information you deem useful. If you would like,
+you can write additional helper methods that you use to simplify the
+implementations of the functions above, though you do not have to do so.
+
+In your implementation, you should follow the interface guidelines from the
+reading. It is especially important to choose what instance attributes and
+methods to make public or private.
+
+## 2. *Ex Post Refacto*
+
+In this problem, you will refactor an existing class implementation to meet the
+interface design principles described in
+ [Reading 5](https://softdes.olin.edu/docs/readings/5-classes-interface-design/#interface-design).
+
+You have been hired as an intern at a new social media startup. The company's
+flagship product is an app called Sleepy Follow, a microblogging platform (like
+Twitter) that is only accessible between 2am and 5am in the user's local time
+zone. The app is written in Python, and you have been brought in to improve the
+implementation of their user accounts system.
+
+The file `user_account.py` contains the code that you will be refactoring.
+
+### 2.1. `@property` Value
+
+The first problem you notice is in the `UserAccount` class: all of the
+attributes of the class seem to be public. This means that a user's account
+details can be changed by other parts of the code, potentially skipping
+important checks designed to prevent the app from breaking.
+
+Making these attributes private (e.g., changing `username` to `_username`) can
+help developers writing code outside of this file to be careful when changing
+the values of these attributes, but you have been asked to try a new approach
+called *properties*. With properties, you change the attributes' names to
+indicate a private attribute, but also add a special function with a name you
+can use to access that attribute.
+
+Here is an example with code you can run:
+
+```{python}
+class ClassName:
+    """
+    Example class to show the use of properties.
+
+    Attributes:
+        _attribute: An int representing an example private attribute.
+    """
+
+    def __init__(self, attribute):
+        """
+        Create a new ClassName instance.
+
+        Args:
+            attribute: An int representing the value of the example private
+                attribute to initialize the instance with.
+        """
+        self._attribute = attribute
+
+    @property
+    def attribute(self):
+        """
+        Return the value of the example private attribute.
+        """
+        return self._attribute
+```
+
+The `@property` line is called a *decorator*. We will not cover how exactly
+decorators work here, but in essence they make certain features of Python
+easier to write in code. In this case, the `property` decorator creates an
+instance attribute called `attribute` that has the same value of the private
+attribute `_attribute`.
+
+```{python}
+instance = ClassName(42)
+print(f"Private instance attribute: {instance._attribute}")
+print(f"Property version of attribute: {instance.attribute}")
+```
+
+However, if you try to change the value through the property, you will get an
+error:
+
+```{python}
+# This line is supposed to result in an error.
+instance.attribute = 0
+```
+
+This is a neat feature because now we have an instance attribute that can be
+accessed in the usual way, but not changed accidentally by the code.
+
+For this part of the problem, you have two tasks:
+
+1. Rename `username` and `posts` to make it clear that they are private
+   instance variables and should not be changed by code outside of
+   `UserAccount`.
+2. Using code in the style above, make `username` a property so that it can be
+   accessed via `instance.username` (but not changed).
+
+The testing file contains some unit tests that will be used to check your
+submission, but you can also check your refactoring here:
+
+```{python}
+from user_account import UserAccount
+
+user = UserAccount("OlinCommunityCollege")
+
+try:
+    user.username = "OlinCollege"
+    print("Instance attribute 'username' not implemented as property")
+except AttributeError:
+    print("Instance attribute 'username' correctly implemented as property")
+```
+
+### 2.2. A-`dict`-ed to Refactoring
+
+As you can see in the code, a post is a tuple of two items: (1) a string
+representing the post's ID and (2) a string representing the text of the post.
+
+Scanning through the code, you spot another issue: a user's posts are stored as
+a list of tuples. This makes searching through posts slow, since you may need
+to check each post ID to find a matching post.
+
+A more subtle implication of storing posts in this way is that
+`generate_new_post_id` relies on getting the number of posts via `len` on the
+user's posts. This means that if you ever change the posts to a type that does
+not support `len`, then this function will break.
+
+For this part of the problem, refactor the class implementation to support
+better extensibility in the future. This means that you have three tasks:
+
+1. Change the class implementation to store the posts as a `dict`, using post
+   IDs as keys and the text of posts as values. (The `dict` should stay as a
+   private instance variable, and you should call it `_posts` if you aren't
+   already doing so.) Make sure that you update the documentation as necessary.
+2. Change the definition of `get_post` to use this `dict` when searching for
+   and retrieving a post.
+3. Implement a new method in `UserAccount` called `num_posts`, which takes no
+   parameters and returns the number of overall posts a user has made by
+   accessing this new `dict`.
+
+Once you have done this, you should be able to run the following cell to check
+that your code is working correctly (but again, your code must pass the unit
+tests). Note that if you have not completed this part yet, running the cell
+below may result in an error.
+
+```{python}
+from user_account import UserAccount
+
+user = UserAccount("OlinCommunityCollege")
+user.post("Hello World!")
+print(f"Number of user posts: {user.num_posts()}")
+```
+
+```{python}
+user.get_post("Ib-4vBKoaNAaMW7VTO14DiTJwqoGTNq5uaHwbpnEYcM")
+```
+
+### 2.3. Moving the Post Goals
+
+Finally, you spot one last issue: the `generate_new_post_id` method doesn't
+need to access private instance attributes or change any properties. It only
+requires a username and the number of posts the user currently has, both of
+which can be accessed using public methods. You can fix this by rewriting this
+function outside of the `UserAccount` class. (This may seem strange, and
+depending on the use case, it may be better to keep this method inside the
+class, but for practice's sake, you should move it outside the class.)
+
+This refactoring is not as simple as moving the function, unchanged, outside of
+the class. The biggest reason for this is that `self` can't be accessed outside
+of the class, so you cannot access a specific instance in this way. To get
+around this limitation, you can replace the `self` parameters with a `user`
+parameter, like this:
+
+```python
+def generate_new_post_id(user):
+    pass
+```
+
+One more change you will need to make is that the `post` method calls
+`self.generate_new_post_id()` to create the new post's ID. You can fix this by
+changing the call to the new external function, and passing it `self` as an
+argument.
+
+To summarize, you have two tasks for this part:
+
+1. Move `generate_new_post_id` outside of `UserAccount` and change its
+   parameters to take a `UserAccount` instance instead of `self`.
+2. Change the implementation of `post` to call the external
+   `generate_new_post_id` function (passing `self` as the argument to this
+   function).
+
+Once you have done this, you should be able to run the following cell and get a
+non-`None` result. **If you have not completed the refactoring for this part,
+running the following cell should result in an error.**
+
+```{python}
+from user_account import generate_new_post_id
+
+user = UserAccount("OlinCommunityCollege")
+
+# This should return Ib-4vBKoaNAaMW7VTO14DiTJwqoGTNq5uaHwbpnEYcM
+generate_new_post_id(user)
+```

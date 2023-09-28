@@ -1,0 +1,149 @@
+---
+jupyter: python3
+execute:
+  enabled: false
+---
+
+# Worksheet 4.2: Plotting
+
+In this worksheet, you will review some data processing and practice creating
+plots with data.
+
+## 0. Setup
+
+First, make sure that you've converted over your Quarto notebook to a Jupyter
+notebook.
+
+We won't need to run the `%load_ext autoreload` cell this time around, since we
+aren't editing any `.py` files.
+
+But in order to make the plotting parts of this worksheet work properly, make
+sure you run the code cell below and every time you restart the notebook or
+kernel.
+
+```{python}
+import matplotlib.pyplot as plt
+%matplotlib inline
+```
+
+## 1. Warmup
+
+Open VS Code and navigate to the folder that this notebook is in. Then, below
+are three problems that you should tackle on your own as a warm-up.
+
+### 1.1. Data Processing
+
+In the cell below, write code that uses the `requests` library to download the
+file `https://softdes.olin.edu/warmup.csv`. You should get this URL and then
+write the contents to a file called `warmup.csv` in the current directory.
+
+```{python}
+# Your code here
+```
+
+### 1.2. Summary Statistics
+
+In the cell below, write code to calculate the mean (average) and the median of
+each column or data. How you store the data and how you calculate these values
+are up to you. Once you have filled in your code, you can run the following code
+cell to print out the values you have calculated. (You should also use the cell
+to see what variable names you should use for each of the column average and
+median values.)
+
+```{python}
+# Your code here
+```
+
+```{python}
+print(f"The mean of column 1 is {mean_1} and the median is {median_1}")
+print(f"The mean of column 2 is {mean_2} and the median is {median_2}")
+```
+
+### 1.3. Simple Plot
+
+In the cell below, write code to plot the data in `warmup.csv`. For now, you do
+not have to worry about adding axis labels or a title, and the default plot
+settings are fine. In the rest of the worksheet, we will look at each of these
+in turn.
+
+```{python}
+# Your code here
+```
+
+## 2. Don't Read Between the Lines
+
+In the cell below, write code that gets the data found in
+`https://softdes.olin.edu/scatter.csv` and plot it without lines between points,
+and in any color other than blue. (There are a couple ways to do this.)
+
+The
+[links to various plotting documentation and tutorials](https://softdes.olin.edu/docs/readings/4-obtaining-processing-data/#learn-matplotlib-and-pyplot)
+from Reading 4 may be helpful here.
+
+```{python}
+# Your code here
+```
+
+## 3. Multiple Plots
+
+In the cell below, write code to download the data found in
+`https://softdes.olin.edu/sample_sizes.csv` to a local file with the same name
+(`sample_sizes.csv`).
+
+```{python}
+# Your code here
+```
+
+This file contains represents the results of running an experiment on a set of
+data, as well as on smaller sample sets of that data. The five columns,
+represent, from left to right:
+
+- The approximate fraction of the original data that was used.
+- The number of lines of the original data that were used. (You can assume that
+  the original data was lines of text.)
+- The size of this data sample in bytes.
+- The size of the processed data in bytes.
+- The size after compressing the processed data, in bytes.
+
+### 3.1. On One Axis
+
+In the cell below, write code to plot the following sets of points on the same
+set of axes:
+
+- The size of the data sample versus the fraction used.
+- The size of the processed data versus the fraction used.
+- The size of the compressed, processed data versus the fraction used.
+
+(For context, plotting A versus B means that A is measured along the $y$-axis
+and B is measured along the $x$-axis.)
+
+Make sure that your plot has appropriate labels and units for both axes.
+
+```{python}
+# Your code here
+```
+
+### 3.2. On Multiple Axes
+
+In the cell below, write code to plot the following sets of points on different
+sets of axes, formatted as two subplots:
+
+- The number of lines in the data sample versus the fraction of data.
+- The size of the compressed, processed data versus the fraction of data.
+
+Make sure that each subplot has appropriate labels and units for both axes, as
+well as a title. The
+[relevant section of Reading 4](https://softdes.olin.edu/docs/readings/4-obtaining-processing-data/#label-your-plots-with-relevant-information)
+has an example of what this plot should look like (with different points,
+labels, and titles).
+
+```{python}
+# Your code here
+```
+
+## 4. Submission
+
+Submit your worksheet by converting your notebook back to `.qmd`, and then
+adding and committing it to GitHub. You should also commit any `.py` files you
+edited as part of this module's worksheets. You don't need to add any `.csv`
+files you created, but you may also submit them if you prefer.

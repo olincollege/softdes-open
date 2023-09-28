@@ -1,0 +1,293 @@
+---
+jupyter: python3
+execute:
+  enabled: false
+---
+
+# Assignment 6: Software Architecture Design
+
+This assignment is intended to help you practice designing a software
+architecture for a larger code base. In some ways, the goal of this assignment
+is to prepare you for the final project in this course, walking you through the
+process of designing a multi-component software project. Specifically, you will
+be building on your design from the previous assignment to implement a game of
+tic-tac-toe.
+
+To ensure that the code you run in this notebook uses the latest version of your
+code, run the following cell each time you start or restart your notebook:
+
+```{python}
+%load_ext autoreload
+%autoreload 2
+```
+
+## 0. Design
+
+Your main task in this assignment is to implement a playable version of
+tic-tac-toe using the Model-View-Controller (MVC) architecture, which you should
+have seen in
+[Reading 6](https://softdes.olin.edu/docs/readings/6-software-architecture-design/#the-model-view-controller-pattern).
+As the name suggests, the final product will consist of objects representing the
+model, the view, and the controller, as well as a function to tie all of these
+together to run the game.
+
+![MVC interactions](static/mvc.png)
+
+The _model_ represents the current state of the game, as well as the ways in
+which the game can be interacted with. In tic-tac-toe, the state of the game is
+the set of moves that have been made so far, as well as which player is the next
+to move. The ways of interacting with the game including marking a square,
+checking whether a player has won, etc.If you completed Assignment 5, you have
+already written implemented the model for the game. Even if you did not, an
+implementation of the model is available for you to use in
+`tic_tac_toe_board.py`.
+
+The _view_ is a representation of the model. In tic-tac-toe, the state of the
+game is just the board squares and whose turn it is (i.e., the next player to
+move), so the view is responsible for displaying these two pieces of
+information. Your first task in this assignment will be to implement a view.
+
+The _controller_ provides a user interface for interacting with the model. In
+tic-tac-toe, a controller represents a player. It takes some input, such as
+typed text from the user, and converts this into an action like marking a square
+(which can be done with through the method provided by the model). In this
+assignment, you have the task of implementing a controllers that takes typed
+text input from the user.
+
+Finally, you will tie everything together using a function to set up and run a
+game of tic-tac-toe.
+
+## 1. An Inherited View (and an Acquired Taste)
+
+For the purposes of this assignment, you will only be creating a single view of
+tic-tac-toe, which represents the game in text form. To keep your design
+extensible in the future, it can be helpful to structure your view in two parts:
+a class that defines the methods that you can use to view the game, and a
+subclass that actually implements those methods. This is helpful because any
+kind of view (text, graphical, etc.) of a game of tic-tac-toe will use the same
+set of methods to display the game, making it easy to swap them out later.
+
+Some starter code for implementing the view is in `tic_tac_toe_view.py`. You may
+find it helpful to have the code visible as you read the problem description
+below.
+
+### 1.1. As Easy as `abc`
+
+![The Jackson 5 - ABC](static/abc.png)
+
+No, not that.
+
+The first part of writing a view is to create an _abstract base class_. The
+purpose of this class is to do some setup that is common to any view, as well as
+define the methods that need to be implemented to have a working view of the
+game. This class is called _abstract_ because you cannot create an instance of
+it directly - the only way to use this class is to define a subclass that
+inherits from it, and then create an instance of the subclass.
+
+The [`abc` module](https://docs.python.org/3/library/abc.html) in the Python
+standard library provides a class called `ABC` that can be used to create an
+abstract base class. To do this, you need to declare a class that inherits from
+`ABC`, as you can see in the `TicTacToeView` class of `tic_tac_toe_view.py`.
+
+For this part, you need to write three methods in `TicTacToeView`:
+
+- An `__init__` method that takes an instance of a `TicTacToeBoard` as a
+  parameter and stores it as a private instance attribute.
+- A `board` property that returns the tic-tac-toe board stored in the
+  `TicTacToeView` instance. (Remember that you can use the `@property` decorator
+  from Assignment 5 to do this.)
+- A `draw` method that is an abstract method (see below) that does nothing
+  (i.e., you can write `pass` as the body of the function).
+
+To declare an abstract method, you can use the `@abstractmethod` decorator, like
+this:
+
+```python
+@abstractmethod
+def foo(self):
+    pass
+```
+
+You won't be able to easily test your code at this point, so once you have done
+this part, you can move onto the next part and test your code after that.
+
+### 1.2. A More Concrete View
+
+![Actual concrete](static/concrete.jpg)
+
+No, not that.
+
+Now you need to create a class that concretely implements the view of the
+abstract view interface you created in the previous part. Essentially, you can
+do this by writing a new class `TextView` that inherits from `TicTacToeView`.
+Because `TextView` is a subclass of `TicTacToeView`, it gets all of the
+attributes and methods of `TicTacToeView` automatically. Because `TicTacToeView`
+is an abstract class, the subclass `TextView` needs to override the `draw`
+method before you can create an instance of `TextView`.
+
+In the `TextView` class, implement the `draw` method, which should print the
+board, followed by a string stating whose turn it is. The string should be in
+the form `It is now X's turn.`. As an example, the `draw` method might print
+something like this:
+
+```
++-+-+-+
+|O| | |
++-+-+-+
+| |X| |
++-+-+-+
+|X| | |
++-+-+-+
+It is now O's turn.
+```
+
+Once you have completed this problem, you should be able to see the above view
+by running the following code cell. (Note that your code also needs to pass the
+unit tests.)
+
+```{python}
+from tic_tac_toe_board import TicTacToeBoard
+from tic_tac_toe_view import TextView
+
+board = TicTacToeBoard()
+view = TextView(board)
+board.mark(1, 1)
+board.mark(0, 0)
+board.mark(2, 0)
+view.draw()
+```
+
+## 2. Taking Control
+
+The next step is to implement a controller for the game. The
+`tic_tac_toe_controller.py` file contains two classes, `TicTacToeController` and
+`TextController`.
+
+Implement `TicTacToeController` in the same way that you write `TicTacToeView`.
+Properly implemented, `TicTacToeController` should be identical to
+`TicTacToeView`, except that it has an abstract method called `move` instead of
+one called `draw`.
+
+Then, implement `TextController` to override the `move` method. The
+`TextController` class only contains the `move` method, and this method should
+get input from the user and make an appropriate move on the board. The user's
+input is expected to be in the form `0 1`, where the first number represents the
+row of the board to mark and the second number represents the column. In this
+example `0 1` should try to mark row 0, column 1, which is the top center square
+of the board.
+
+You can get input from the user with the built-in
+[`input` function](https://docs.python.org/3/library/functions.html#input). This
+function displays a prompt to the user and stores the entered text in a string.
+If you run the following cell, you should see a box you can enter text in. If
+you then enter some text and press enter, the code will report back what you
+entered.
+
+```{python}
+text = input("Type some text here: ")
+print(f"You entered the following:\n{text}")
+```
+
+The `move` method should get this input and process it to obtain a row and
+column index, and then attempt to mark that square of the board using the `mark`
+method of the `TicTacToeBoard` class. The `move` method does not return
+anything, and should call the `mark` method.
+
+There are a few ways that processing user input can fail: the user might input
+only one integer, or some other text than an integer (e.g., `foo`), or the
+square may already have a mark in it. If this happens, your `move` method should
+prompt the user for input again, repeating this process until the user inputs a
+valid move.
+
+To handle these cases, you should use a _try-except block_, which looks like
+this:
+
+```{python}
+try:
+    number = input("Type an integer here: ")
+    x = int(number)
+except ValueError:
+    print(f"Error: '{number}' is not an integer")
+```
+
+If you run this block, you can type some text in, and if you type an integer
+like `42`, then the value of `x` will the integer you entered. If not, you will
+see an error message printed.
+
+The block works by trying to execute some lines of Python, and if a certain
+error occurs (`ValueError` in the example above), it will stop and instead
+execute some other code.
+
+If your `move` method is properly implemented, invalid user input will produce
+only one of two errors: `IndexError` or `ValueError`. To handle multiple error
+types, you can write the try-except block like this);
+
+```python
+try:
+    # Get user input and process it here.
+except (IndexError, ValueError):
+    # Handle the error here.
+```
+
+One clever trick you can use to detect invalid user input is to do some checking
+in the `try` portion of your block, and raise an error if you find an issue. For
+example, you could do this (as a hypothetical example):
+
+```python
+try:
+    if x < 0:
+        raise ValueError
+except (IndexError, ValueError):
+    # Handle the error here.
+```
+
+This allows you to quickly jump to the error section if you find invalid input,
+even if it would not otherwise cause an error.
+
+If your processing encounters an error, you should print a short error message
+and get user input again. A simple way of doing this is to call `move` again,
+but you are free to do this however you choose.
+
+Once you have completed this problem, you should be able to run the code cell
+below to input a move and see it reflected on the board.
+
+```{python}
+from tic_tac_toe_controller import TextController
+from tic_tac_toe_board import TicTacToeBoard
+
+board = TicTacToeBoard()
+controller = TextController(board)
+controller.move()
+print(board)
+```
+
+## 3. All Together Now
+
+Once you have all of your MVC components, you're ready to put it all together.
+The `tic_tac_toe_game.py` file contains a function called `main` that you should
+implement to set up and run your game of tic-tac-toe.
+
+In order, your `main` function should do the following:
+
+1. Create a `TicTacToeBoard` instance to represent the game board.
+2. Create a `TextView` instance and two `TextControllers` instances to represent
+   the view and controllers for the board, respectively.
+3. (optional) Set up any other variables that may be helpful in running the
+   game.
+4. Run the game, getting moves from each player until either one player has won,
+   or until the board is full.
+5. Print a short message stating who won or that the game was a draw, and exit
+   (by letting the function end).
+
+You _must_ create two `TextController` instances. While it is possible to run
+the game with only a single controller, creating separate controllers for `X`
+and `O` allows you to swap out a single player's controller in the future (for
+example, if you write an AI controller and want to play against it).
+
+Other than that, how you set up and run your game is completely up to you. Feel
+free to chat with a CA or instructor for help in thinking through your design.
+
+Once you have completed this problem, you should be able to run
+`python tic_tac_toe_game.py` from your terminal and play a game of tic-tac-toe!
+(You'll have to play both sides, or find a friends to play against.)
+Congratulations! You've just written a complete, playable game in Python.

@@ -1,0 +1,301 @@
+---
+jupyter: python3
+execute:
+  enabled: false
+---
+
+# Assignment 2: Sequences, Testing, and Program State
+
+This assignment is intended to give you a bit more practice with implementing
+functions in Python, and working with the new concepts we saw in Reading 2,
+including lists, loops, unit testing, and state and stack diagrams.
+
+## 0. Rubric and Preliminary Setup
+
+As with the first assignment, you should take a look at the rubric to get a
+sense of how your work will be evaluated. The rubric is in `rubric-2.md`.
+
+Once you've done that, run the following cell to make sure that this notebook
+loads the latest version of your files when running code:
+
+```{python}
+%load_ext autoreload
+%autoreload 2
+```
+
+## 1. Parenthesis Antithesis
+
+In this exercise, you will not be implementing any functions, but you will write
+unit tests for pytest to test other code.
+
+The problem you will be thinking about in this exercise is called _parenthesis
+matching_, a common puzzle and programming problem. (This is in fact a very
+similar process to how Python detects syntax errors for not closing
+parentheses.)
+
+In parenthesis matching, you are given a string which can contain any number of
+left and right parentheses (`(` and `)`). The string will not contain any
+characters that are not a left or right parenthesis. You then need to determine
+whether this string's parentheses match or not. As you match parentheses, you
+should keep in mind the following rules:
+
+1. Every left parenthesis (`(`) needs to have a matching right parenthesis (`)`)
+   somewhere to its right in the string. So `()` would match, but `)(` would
+   not.
+2. Matching needs to happen in the proper order. As you go through the string
+   from left to right, whenever you hit a right parenthesis, it matches the
+   closest left parenthesis that has not already been matched. For example, if
+   you go through `(())`, when you hit the third character (the first right
+   parenthesis), it matches the second character (which is right next to it).
+   The fourth character (the last right parenthesis) can then only match to the
+   first left parenthesis.
+
+Your task in this exercise is to write unit tests for functions that implement
+parenthesis matching and to determine which of these are correct.
+
+### Write Unit Tests
+
+**If you are not on the course WSL setup, this part of the problem may result in
+unusual errors. Contact the teaching team if this happens.**
+
+You have been given two simple unit tests (with a short comment explaining each)
+to start, but to gain a more concrete understanding of how parenthesis matching
+should work under different test cases, you need to add more unit tests. In the
+file `test_paren_matching.py`, we have created a framework for you to add test
+cases in. The variable `UNIT_TEST_CASES` at the top of the file contains some
+sample tuples of two items like `("()", True)`, which represent a single unit
+test. In these tuples, the left item is the string of parentheses to test and
+the right item is a boolean representing whether this string is expected to
+match or not.
+
+Your tests will be run against a solution you know to be correct as well as 14
+other implementations that we have written, numbered 0 through 13 (inclusive).
+Some of these work correctly, and others do not. It is your job to determine
+which ones are correct and which ones are not. To make things a bit trickier,
+you are not provided with the Python source code for these implementations - we
+have instead provided compiled versions of the implementations in the `compiled`
+folder. (Yes, compiling Python code like you might do with code in Java is a
+thing, though it's a bit more of a finicky process.)
+
+We have also provided you with a correct implementation of the function, which
+you can see defined in `test_paren_matching.py` as `correct_solution`. You can
+feel free to look through that code to see how it works, or to add your own
+tests as above and see what the correct solution outputs.
+
+You can run these tests with `pytest test_paren_matching.py` in the directory
+for this assignment. A test that fails will be reported to you with an
+identifier that looks like this:
+
+```
+test_paren_matching.py::test_correctness[1-)(-False]
+```
+
+You can see that this identifier reports which implementation failed (`1`), what
+its input was (`)(`), and the expected result (`False`).
+
+You must add at least 4 more unit tests, but beyond that, add as many unit tests
+as you feel are necessary to determine whether each of the 14 implementations is
+correct or not.
+
+For convenience, we have created a list with different test cases in them at the
+top of the `test_paren_matching.py` file. This list is called `UNIT_TEST_CASES`,
+and consists of pairs written like this:
+
+```python
+# Add your test cases here.
+UNIT_TEST_CASES = [
+    # Check that a simple pair of parentheses is accepted.
+    ("()", True),
+    # Check that a pair of parentheses in the wrong order is rejected.
+    (")(", False),
+]
+```
+
+Each pair is a string to check (`"()"`, in the first case), followed by the
+expected output of the parenthesis matching implementation (`True`, in the first
+case). This pair is actually a data type we haven't seen yet (a tuple), but for
+now, you can think of it as a list with parentheses instead of square brackets.
+Use the format shown above to write your tests, with a comment describing each
+test case and the test case on the following line.
+
+For each test case, your comment should indicate what the case represents (for
+example, `")("` represents a matching pair of parentheses, but in the wrong
+order) so that we can get an insight into your testing mindset. As you do this,
+try to illustrate your thought process in creating this _set_ of tests, in
+addition to the individual test.
+
+Here are some more guidelines:
+
+- The unit tests you start with show that at least 5 of the 14 implementations
+  have bugs. Your solution must provide unit tests that cause **at least one
+  additional implementation to fail**.
+- That being said, **no test you add should cause our provided correct solution
+  to fail**. If you see something like
+  `test_paren_matching.py::test_correctness[correct-)(-False]` in the test
+  results (note that it is identified with `correct` instead of a number), you
+  should not include this test in your final submitted version. Feel free to
+  write about it below, however, this will help us better understand your
+  thought process as you test the code.
+
+### Determine Correct Implementations
+
+Once you have run what you feel to be a sufficient set of unit tests, you should
+be able to identify which implementations are behaving correctly. **Note that
+you will still have failing unit tests here; this is normal and you will not
+lose correctness points just for failing tests.**
+
+In the file `test-report.md`, list these implementations (by number) and explain
+why you believe they are correct. (Clearly, it's partly because they pass all of
+the unit tests, but you should explain why you believe your unit tests have
+covered most or all of the possible cases in which an implementation of this
+function might fail.)
+
+Even if you are not confident that these are the correct implementations, you
+should still try to provide some reasoning for why you believe they are correct.
+
+## 2. `next_palindrome(393)` Not Found
+
+So far in this course, you have probably encountered and fixed at least a few
+bugs in your code. In this problem, you will get the chance to find, diagnose,
+and fix a bug in some code. The bug is intentionally designed to be fixed
+quickly once found, so much of the value of this problem is ~~the friends we
+made along the way~~ the process of discovering the bug and finding its cause.
+
+In the file `palindrome.py`, we have provided you a function called
+`next_palindrome`. This function takes an integer that is _already a palindrome
+(the same backwards and forwards)_, like 393. It then returns the next integer
+(counting upwards) that is also a palindrome, which in this case would be
+[404](https://www.marvel.com/404). You should assume that this function will not
+work if given a number that is not a palindrome, like 8114.
+
+Unfortunately, the code as written contains a bug that makes it behave
+incorrectly. Your job is to find and fix this bug, and document your findings.
+The following steps are intended to take you through the process that a
+programmer might follow when faced with a bug in code.
+
+### Bug Watching
+
+First, you will need to actually see the bug occurring for yourself. In
+practice, you might do this through unit testing, but for the purposes of this
+problem, you can do so in the testing cell below.
+
+Run the cell with different starting palindromic values, and see if you can find
+a case where you get an incorrect result from `next_palindrome`. You can pick
+numbers randomly, but we strongly encourage you to think through this
+systematically. You might do this by reading through the functions in
+`palindrome.py`, or you might try to think about cases that are likely to trip
+up `next_palindrome`.
+
+As you run these tests, keep some notes in the file `palindrome-report.md` that
+highlight test cases that helped you gain more information about the possible
+bug in `next_palindrome`. You might write something like this for a given test
+case:
+
+> I tried `next_palindrome(0)` because it is the only palindromic number that is
+> 0 by itself, and I wanted to see how the function worked with this input. It
+> behaved correctly, helping me eliminate that as a trigger of the bug.
+
+Fill in the relevant section of `palindrome-report.md` with at least **three**
+test cases, along with your reasoning for each. At least one of these test cases
+should be an example of `next_palindrome` not working correctly.
+
+```{python}
+from palindrome import next_palindrome
+
+# Edit the int in this function call to see what you get.
+next_palindrome(393)
+```
+
+### A Diagram State of Mind
+
+Now that you have found a test case that produces a bug, the next step is to
+find where in the code this bug is occurring.
+
+Using print-based debugging in `palindrome.py` or
+[Python Tutor](http://pythontutor.com/), run or step through the code until you
+find where the bug is occurring. (Note that the bug may be anywhere in
+`palindrome.py` - not just in the `next_palindrome` function.)
+
+Once you have found the source of the bug, draw or take a screenshot of a stack
+and state diagram at the line of code with the bug. Your diagram should show any
+functions currently running or waiting to return, along with the values of all
+variables defined in each of those functions. (A screenshot of Python Tutor is
+fine for this purpose.)
+
+When you have this picture, include it in the relevant section of
+`palindrome-report.md`. If you include the picture by placing the image file in
+this assignment folder and linking to the file in Markdown, please make sure
+that you add the image file in Git!
+
+### Fix the Bug
+
+Now you know (1) how to trigger the bug, and (2) where in the code it's
+occurring. With this knowledge, change the code of `palindrome.py` so that this
+bug no longer occurs. As we mentioned at the start of the problem, the bug is
+intentionally designed to be fixed with a small change once found.
+
+In addition to making this change, briefly describe in the relevant section of
+`palindrome-report.md` how your change fixes the bug.
+
+For fun, if you want to test out your code and make sure that it no longer
+exhibits the bug, you can do that in the cell below:
+
+```{python}
+from palindrome import next_palindrome
+
+# Edit the int in this function call to see what you get.
+next_palindrome(393)
+```
+
+## 3. Read Aloud with Python
+
+In this problem, your task is to implement a function to print out the numbers
+in the
+[look-and-say sequence](https://en.wikipedia.org/wiki/Look-and-say_sequence).
+The sequence starts like this: 1, 11, 21, 1211, 111221, ...
+
+The sequence starts with 1, and to get every subsequent number, you "read aloud"
+the digits in the previous number. So the next numbers would be as follows:
+
+- 11, because the previous number is a single 1, read as "one 1".
+- 21, because the previous number is 1 repeated twice, read as "two 1s".
+- 1211, because the previous number is a single 2 followed by a single 1, read
+  as "one 2, one 1".
+
+In the file `sequence.py`, you will find a function called `look_and_say`, as
+well as a function called `next_number`. The function `look_and_say` takes a
+number `n` and should print the first `n` numbers in the look-and-say sequence.
+
+The function `next_number` is intended as a _helper function_: a function that
+does an important part of the overall task of printing out the look-and-say
+sequence. Specifically, `next_number` takes a number and returns the next number
+in the look-and-say sequence. Once you implement `next_number`, you can call it
+to help you in `look_and_say`.
+
+Implement both of these functions, adding relevant docstrings for each.
+
+As you implement these function, you may find it helpful to copy in and use any
+other functions that you have implemented in previous assignments or worksheets.
+Not only is this completely fine, but we encourage you to look back at the
+functions you have implemented and see how you can repurpose them for this
+problem. You may find that some of them help in your implementation!
+
+Once you have implemented these functions, you can test it out for fun in the
+code cell below:
+
+```{python}
+from sequence import look_and_say
+
+# Feel free to change the parameters and use this function call for testing.
+look_and_say(5)
+```
+
+## 4. Submit
+
+Once you have completed these problems, you're done with Assignment 2!
+
+Be sure to check that your code is working correctly by running unit tests. Also
+make sure to autoformat your code and fix any outstanding style issues.
+
+Once you've done this, go ahead and submit by checking all relevant files into
+GitHub, and don't forget to submit a URL to your commit on Canvas!

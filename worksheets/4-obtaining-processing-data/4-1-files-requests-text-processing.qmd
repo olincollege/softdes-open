@@ -1,0 +1,235 @@
+-- jupyter: python3 execute: enabled: false
+
+---
+
+# Worksheet 4.1: Files, Web Requests, and Data Processing
+
+In this worksheet, you will practice reading from and writing to files, learning
+and using the `requests` library to download data from the Web, and doing some
+simple data processing with a common data format.
+
+## 0. Setup
+
+First, make sure that you've converted over your Quarto notebook to a Jupyter
+notebook.
+
+In order to make some parts of this worksheet work properly, make sure you run
+the code cell below and every time you restart the notebook or kernel.
+
+```{python}
+%load_ext autoreload
+%autoreload 2
+```
+
+## 1. Warmup
+
+Below are two problems that you should tackle on your own as a warm-up. They are
+designed to refresh your memory of working in VS Code and on using default
+arguments and keyword arguments in a simple setting.
+
+### 1.1. List Splitter
+
+In the file `split.py`, you will find a function called `split_list`. This
+function should take a list `int_list` of integers and a float `fraction`. It
+should split the list into two smaller lists, with the first being approximately
+`fraction` of the original's length, and returns a tuple containing these two
+lists.
+
+Here, "approximately" means that you should round down to the nearest integer,
+so if `int_list` has 7 elements and `fraction` is 0.5, then the first list will
+contain the first 3 elements (3.5 rounded down) and the second will contain the
+remaining 4 elements.
+
+If `fraction` is not provided, it should be set to 0.5 by default.
+
+In the cell below, you can find a sample input list and expected result. Feel
+free to use it to test your function.
+
+```{python}
+from split import split_list
+
+# This starts as [1, 2, 3, 4, 5, 6, 7] by default.
+input_list = [1, 2, 3, 4, 5, 6, 7]
+# This should return ([1, 2, 3], [4, 5, 6, 7]) for the default list.
+split_list(input_list)
+```
+
+### 1.2. Five-Hundred Twenty-Some Thousand Minutes
+
+You may have heard the song "Seasons of Love" from the musical _Rent_, which
+claims that there are 525,600 minutes in a year. (This is true of a non-leap
+year, at least.)
+
+The function `minutes_per_year` below takes a number of hours in a day and a
+number of days per year and returns the number of minutes in a year.
+
+```{python}
+def minutes_per_year(hours_per_day=24, days_per_year=365):
+    return 60 * hours_per_day * days_per_year
+```
+
+First, use a keyword argument in this function to calculate the number of
+minutes in a leap year.
+
+```{python}
+# Write your code here.
+```
+
+Next, use [WolframAlpha](https://www.wolframalpha.com/) to look up the number of
+hours per day and days per year of other planets in the solar system. Then, fill
+in the cell below with code to calculate the number of minutes per year on other
+planets.
+
+```{python}
+# Write your code here.
+print(f"There are {minutes} minutes per year on {planet_name}")
+```
+
+## 2. You Wouldn't Download a Flight
+
+We will now practice using the `requests` library to download a file. This
+library is often used to access a site for data scraping or to build an
+application that interacts with sites.
+
+### 2.0. Learn About `requests`
+
+To start, learn a bit about the `requests` library by reading the
+[relevant SoftDes website page](https://softdes.olin.edu/docs/readings/requests/),
+as well as the
+[official `requests` quickstart tutorial](https://requests.readthedocs.io/en/latest/user/quickstart/).
+
+### 2.1. Start with What's `import`ant
+
+First, to get started, write code below to import the library:
+
+```{python}
+# Write your code here.
+```
+
+### 2.2. `get`ting Used to It
+
+Now use the `requests` library to access the file at
+`https://softdes.olin.edu/processed_flight_data.csv`. You do not need to write
+the data to a file just yet.
+
+```{python}
+# Write your code here.
+```
+
+### 2.3. Status Check
+
+To make sure that the request succeeded, check that the status code of your
+request is 200. (If it is 404, 501, or some other code, then there was an error
+and you likely do not have the file contents.) If you need to refresh your
+memory on how to find the status code of a request, see the
+[`requests` website](https://requests.readthedocs.io/en/master/).
+
+```{python}
+# Write your code here.
+```
+
+### 2.4. Doing What's Write
+
+You can now write the text from this request to a file. Write the contents of
+the response to a local file called `processed_flight_data.csv` in the current
+directory. You can do this one line at a time or all at once, but make sure that
+the contents of the file you write are exactly the same as the contents of the
+response.
+
+```{python}
+# Write your code here.
+```
+
+## 3. Data Processing
+
+Now that we have some text data to work with, we can begin processing it.
+
+If you would like, you can use this problem as a chance to learn the Pandas
+library. You can find a brief explanation of Pandas and links to useful
+tutorials
+[here](https://softdes.olin.edu/docs/readings/web-data/#pandas-data-in-tables).
+
+### 3.1. `read` Me - I'm an `open` Book
+
+To start, open the file that you just wrote and read its contents into a
+variable. For now, the contents can be in any format you choose - if you find
+that a different format would be more suitable to the later data processing
+questions, you can come back and change the way you read from the file.
+
+```{python}
+# Write your code here.
+```
+
+For reference, the file shows a number of flights on a major US airline between
+its hub airports in a single month. Each line has four items, all separated by
+commas:
+
+- the origin airport code,
+- the destination airport code,
+- the total number of passengers carried along that flight segment during the
+  month, and
+- the total amount of time that flights spent along that segment in the month.
+
+(This information is also shown in the first row of the file.)
+
+### 3.2. Sit Back, ReLAX, and Enjoy Your Flight
+
+For your first data processing exercise, calculate the total number of
+passengers that traveled from LAX to _any_ other hub airport in this month. You
+may use Pandas or not, depending n whether you used it in the previous step.
+
+```{python}
+# Write your code here.
+```
+
+### 3.3. Some Serious Airtime
+
+Next, calculate the total amount of time spent in the air for _all_ flights.
+
+```{python}
+# Write your code here.
+```
+
+### 3.4. Arrival Traffic
+
+Next, calculate for each hub airport the total number of passengers _arriving_
+at that airport from any other hub airport.
+
+For convenience, the hub airports are:
+
+- `ORD` (Chicago O'Hare)
+- `DEN` (Denver)
+- `IAH` (Houston)
+- `LAX` (Los Angeles)
+- `EWR` (Newark)
+- `SFO` (San Francisco)
+- `IAD` (Washington Dulles)
+
+Your results should be recorded in a dictionary mapping each hub airport code to
+its total number of arriving passengers.
+
+```{python}
+# Write your code here.
+```
+
+### 3.5. Save Your Data
+
+Finally, write the data in the dictionary you computed earlier to a new file
+called `arrivals.csv`. Because this is a CSV, you should write your data in the
+following form:
+
+```
+ORD,1050238
+DEN,995236
+...
+```
+
+```{python}
+# Write your code here.
+```
+
+## 4. Submission
+
+Submit your worksheet by converting your notebook back to `.qmd`, and then
+adding and committing it to GitHub. You don't need to add the `.csv` files you
+created in this exercise, but you may also submit them if you prefer.

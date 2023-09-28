@@ -1,0 +1,27 @@
+D,Los Angeles,LAX,13:58,B65165,JetBlue Airways,B
+A,Los Angeles,LAX,13:59,B65165,JetBlue Airways,A
+D,Los Angeles,LAX,14:00,B65165,JetBlue Airways,D
+D,Los Angeles,LAX,13:58,DL5633,Delta Air Lines,A
+A,Los Angeles,LAX,13:59,DL5633,Delta Air Lines,C
+D,Los Angeles,LAX,14:00,DL5633,Delta Air Lines,A
+D,Los Angeles,LAX,13:58,TP4394,TAP Air Portugal,B
+D,Los Angeles,LAX,13:59,TP4394,TAP Air Portugal,C
+A,Los Angeles,LAX,14:00,TP4394,TAP Air Portugal,A
+D,New York,JFK,13:58,B65165,JetBlue Airways,D
+D,New York,JFK,13:59,B65165,JetBlue Airways,C
+D,New York,JFK,14:00,B65165,JetBlue Airways,A
+D,New York,JFK,13:58,DL5633,Delta Air Lines,A
+A,New York,JFK,13:59,DL5633,Delta Air Lines,C
+D,New York,JFK,14:00,DL5633,Delta Air Lines,A
+D,New York,JFK,13:58,TP4394,TAP Air Portugal,D
+D,New York,JFK,13:59,TP4394,TAP Air Portugal,A
+D,New York,JFK,14:00,TP4394,TAP Air Portugal,B
+D,San Francisco,SFO,13:58,B65165,JetBlue Airways,C
+A,San Francisco,SFO,13:59,B65165,JetBlue Airways,A
+D,San Francisco,SFO,14:00,B65165,JetBlue Airways,D
+D,San Francisco,SFO,13:58,DL5633,Delta Air Lines,B
+D,San Francisco,SFO,13:59,DL5633,Delta Air Lines,A
+D,San Francisco,SFO,14:00,DL5633,Delta Air Lines,D
+D,San Francisco,SFO,13:58,TP4394,TAP Air Portugal,C
+D,San Francisco,SFO,13:59,TP4394,TAP Air Portugal,B
+A,San Francisco,SFO,14:00,TP4394,TAP Air Portugal,A

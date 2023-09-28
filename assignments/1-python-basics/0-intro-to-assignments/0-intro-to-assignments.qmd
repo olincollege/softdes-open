@@ -1,0 +1,509 @@
+---
+jupyter: python3
+execute:
+  enabled: false
+---
+
+# Assignment 0: Introduction to Assignments
+
+This assignment is designed to teach you the basics of working with tools you
+will use in SoftDes assignments: a bit of Python, a bit of Jupyter or Quarto
+notebooks and Markdown, and a bit of Bash and Git. It's also designed to help
+you understand the submission process we use in this course.
+
+**Please read these instructions carefully. Failure to follow these instructions
+may result in you not receiving credit on this assignment.** These instructions
+may seem pedantic, but our testing workflow depends on a very specific setup to
+grade your work accurately and save our CAs' time. Real-world automated software
+testing also tends to check for exact matches to a set of specifications, so
+learning to be attentive to detail early on will serve you well.
+
+In a nutshell, your job in this assignment is to do the following:
+
+0. Tweak a few more settings in your setup.
+1. Fill in an intake survey to tell us a bit more about yourself and what you
+   want out of this course.
+2. Run unit tests on your code. In this assignment, this is to make sure that
+   you didn't accidentally input an invalid value into the intake survey, but in
+   the future assignments, you'll use these tests to get a sense of how well
+   your code is working.
+3. Run an autoformatter on your code. This makes sure that your code is using a
+   consistent style that is easier for others to read.
+4. Run a style check on your code, and fix any outstanding issues. There are a
+   few edge cases that autoformatters can't fix automatically, so it's important
+   to check that your code is styled properly even after running the
+   autoformatter.
+5. Signal that you are done working on the assignment, or that you are taking
+   one or more late days, by changing the contents of a status file.
+6. Use Git on the command line to submit your assignment. This involves staging
+   your changes to the intake survey, committing your changes, and then pushing
+   your commit to your fork of the course repository.
+
+Grading and feedback on this assignment (and on all assignments in this course)
+will be based on a rubric distributed with the assignment. You can find the
+rubric in `rubric-0.md`.
+
+## 0. Setup
+
+Before you start work on the assignment, we may sometimes ask you to complete a
+few setup steps first. All of these setup steps will be useful for the
+assignment, and will be marked under Problem 0.
+
+Sometimes, a step will not be required for the assignment. In this case, the
+description of the section will be marked as "(Recommended)" or "(Optional)" as
+appropriate.
+
+### 0.1. Tweak VS Code Settings
+
+In the computational setup, we had you set your default formatter to autopep8.
+For a variety of reasons, we have decided to change our course autoformatter to
+another formatter called [Black](https://black.readthedocs.io/en/stable/).
+Therefore, you will need to change your default formatter over to Black. (You
+_could_ keep autopep8, but be warned that there are certain style issues that
+autopep8 cannot fix, and you will be on your own for fixing these issues by
+hand.)
+
+To change your default formatter, open the Settings menu in VS Code by pressing
+`Ctrl-,`. Then, search for "Python > Formatting: Provider". In the menu that
+appears, select "black" as your formatter.
+
+![Formatter selection menu](https://softdes.olin.edu/set_formatting_to_autopep8.png)
+
+Then, search for "Python > Testing: Pytest Enabled" and make sure that the box
+is checked.
+
+### 0.2. Sync Your Repository
+
+Before you begin work on **any** assignment, you should make sure that your
+repository is up to date. Failure to do this may result in Git errors that are
+hard to debug and/or fix. You should do this even if you have synced your
+repository recently, as changes can come at any time.
+
+To do this, go to your command line and use the `cd` command to navigate to your
+local copy of the course repository. Then, run the following command:
+
+```
+$ git pull upstream main
+```
+
+This will ensure that you get the latest changes from `upstream`, the version of
+the course repository maintained by the course staff. This will get you the
+latest versions of all of the assignments, worksheets, etc.
+
+In some cases, you may see a VS Code window open and a file appear containing
+something like `Merge branch 'foo' into main`. If you do, you should save that
+file and close the window.
+
+If you see any other output that might indicate an error, contact the teaching
+team, as debugging Git errors is best done with others at first.
+
+After getting that step to successfully complete, run the following command:
+
+```
+$ git pull
+```
+
+This will get you the latest changes from `origin`, your fork of the course
+repository. By doing this, you will get the latest feedback on your assignment
+submissions, and occasionally a few other fixes.
+
+You may encounter the same issues as you did with the earlier command. If you
+do, use the same fixes listed earlier.
+
+Once you have successfully run those two commands, you can move on.
+
+### 0.3. Convert Quarto Notebook
+
+The assignment writeups are distributed as Quarto notebooks, but VS Code makes
+it difficult to work directly with these notebooks. Fortunately, the notebooks
+can be easily converted to and from Jupyter notebooks, which are easy to work
+with in VS Code.
+
+To convert the notebook to Jupyter format, use the `cd` command to navigate to
+the folder where this file is. If you are in the course repository, you can go
+to `assignments/0-intro-to-assignments`. Then run the following command:
+
+```
+$ quarto convert 0-intro-to-assignments.qmd`
+```
+
+If the conversion is successful, you should see the following output:
+
+```
+Converted to 0-intro-to-assignments.ipynb
+```
+
+If so, you can move on.
+
+### 0.4. Ensure Correct Python Setup
+
+Now, you should open the `0-intro-to-assignments.ipynb` file in VS Code. In the
+top right corner of the window that opens, make sure that you are using the
+"base" version of Python (highlighted in red below):
+
+![Jupyter notebook in VS Code, using the base version of Python](static/jupyter_server.png)
+
+You can click there to select if you need to change it.
+
+Then, open a `.py` file. In the bottom right corner of the VS Code window, make
+sure that the "base" version of Python is shown as well (highlighted in red
+below):
+
+![Python file in VS Code, using the base version of Python](static/python_interpreter.png)
+
+Again, you can click if you need to change this.
+
+Once you have checked and adjusted the settings, you can move on.
+
+### 0.5. Set Up Jupyter Notebook
+
+Before going on with this assignment, run the following code cell in Jupyter,
+which will make sure this notebook loads the latest version of your survey
+responses each time.
+
+```{python}
+%load_ext autoreload
+%autoreload 2
+```
+
+Now you are ready to start this assignment!
+
+## 1. Intake Survey
+
+You will start by filling out a short intake survey for this class, which
+doubles as a way to get you a bit of practice working with Python code. To fill
+out the intake survey, open the file `intake_survey.py` in VSCode. This file
+contains some variables that you should fill in with your survey responses. If
+you want to get a sense of what a filled-out survey will look like and how it
+should be properly formatted, take a look at `sample_responses.py`.
+
+As you fill in your survey, please keep the following things in mind.
+
+### 1.1. Use the Right Data Types
+
+If you are not answering an optional question, please leave the line unchanged.
+This will help us determine which questions you have actually answered.
+
+Please only use integers between 1 and 5 inclusive (i.e., don't use 0 or 2.5)
+when describing your previous experience level.
+
+### 1.2. Limit Line Length
+
+For name, pronunciation, pronouns, or description of previous experience, please
+make sure that your lines are limited to **80 characters long**. If you have
+followed the computational setup and the setup steps in this assignment, then
+_most_ (if not all) lines should be automatically reformatted to a maximum of 80
+characters when you save the file. Otherwise, you will have to adjust the lines
+by yourself. This might be tedious, but even in these modern times, many code
+editors/viewers do not wrap long lines properly, and so maintaining a reasonable
+line legnth is good for accessibility reasons.
+
+You can check the length of your lines in VSCode by looking at the bottom right
+corner of your window (where it says something like "Ln 42, Col 80") - if the
+column number at the end of your line is _greater than 81_ (since the column
+number is the space to the right of the cursor), the line is too long. If a line
+is too long, you can _break_ the line like this:
+
+```python
+long_line = (
+    "When you have a long, long string, break it between words and continue the"
+    " rest of the it on the next line(s). It's the right thing to do, and you"
+    " know it."
+)
+```
+
+The beginning of the long string should be indented **4 spaces** from the start
+of the next line. The quote mark (`"`) at the end of each line must be at or
+before the 80-character mark, so the last complete word needs to end at column
+79 or less. Also note that all lines of the string after the first should start
+with a space and should be aligned to the start of the first line of the string,
+as shown above (and in the sample responses). Finally, note that the closing
+parenthesis should aligned to the start of the variable name (`long_line` in
+this case).
+
+### 1.3. Format Text in Lists
+
+The learning goals and concerns in the surveys are lists, so you can include
+multiple goals or concerns, with each one being a string. As with long strings,
+`sample_responses.py`, strings in lists should be indented by 4 spaces.
+
+At the end of each learning goal or concern, put a comma (`,`) after the end of
+the string. You can do this even after the last string in the list.
+
+### 1.4. (Recommended) Do a Quick Check
+
+We've written some code to help you check that you've filled in your intake
+survey properly. **You don't have to understand this code for now.** But, by the
+end of this class, you should be able to write and understand code like this!
+
+Run the code cell below to check that the output matches what you'd expect. (You
+may notice long lines breaking in some places - this is fine.)
+
+```{python}
+from intake_survey import (
+    preferred_name,
+    pronunciation,
+    pronouns,
+    previous_programming_experience,
+    previous_programming_description,
+    previous_python_experience,
+    previous_python_description,
+    previous_tools_experience,
+    previous_tools_description,
+    learning_goals,
+    concerns,
+)
+
+
+# Whoa, preview of Python functions!
+def print_experience_summary(category, experience, description):
+    """
+    Print a summary of the student's experience in some category.
+
+    Args:
+        category: A string describing what this experience is in.
+        experience: An int between 1 and 5 (inclusive) describing the student's
+            experience level.
+        description: A string describing more about the student's experience.
+    """
+    print(f"On a scale of 1 to 5, I'd rate my experience in {category} a"
+          f" {experience}")
+    if description:
+        print(f"({description})")
+
+
+# Print basic information about you.
+print(f"Hi, my name is {preferred_name}")
+if pronunciation:
+    print(f"(which you should pronounce as {pronunciation})")
+if pronouns:
+    print(f"and my pronouns are {pronouns}\n")
+
+# Print a summary of your previous experience.
+for summary_arg in [
+    ("programming", previous_programming_experience,
+     previous_programming_description),
+    ("Python", previous_python_experience, previous_python_description),
+    ("the command line and Git", previous_tools_experience,
+     previous_tools_description),
+]:
+    print_experience_summary(*summary_arg)
+
+# Print your goals and concerns in this course.
+print("\nMy goals in this course are as follows:")
+for goal in learning_goals:
+    print(f"  * {goal}")
+print("\nMy concerns about this course are as follows:")
+for concern in concerns:
+    print(f"  * {concern}")
+```
+
+## 2. Unit Testing
+
+In general, we will use _unit tests_ on your submitted code to check that it is
+working as intended. For this assignment, you are simply filling in the values
+of different variables, so there isn't much to check. Still, it's good to check
+that you answered all required questions in the survey with valid values. In
+this course, we'll be using a test framework called pytest.
+
+Using one of the options below, run unit tests for this assignment in pytest and
+make sure that they all pass. You won't get full credit for this assignment if
+any of the tests don't pass, so be sure to fix any errors that you see!
+
+### 2.1. (Option 1) Run pytest in the Terminal
+
+The simple way is to open a terminal (in Ubuntu), navigate (`cd`) to the folder
+that this assignment is in, and run the command `pytest`. It will print output
+that report information including how many tests it ran, how many passed, how
+many failed, and how long it took.
+
+### 2.2. (Option 2) Run pytest in VSCode
+
+The other way is to run the tests from within VSCode. Open this assignment
+folder in VSCode by going to File -> Open Folder (Ctrl-K then Ctrl-O; note that
+Ctrl-O is used to open a single file and **will not work here**).
+
+Then, open the Command Palette (Ctrl-Shift-P in Ubuntu) and type in "test". You
+should see an option that says "Python: Configure Tests". Select this option,
+which will give you a drop-down menu that allows you to pick from several
+testing frameworks - select "pytest". Finally, you will be asked to "Select the
+directory containing the tests" - select ". Root directory".
+
+After doing this, open the Command Palette again, and search for and select the
+option called "Test: Run All Tests". You should see the left sidebar display
+change to show tests running and their results:
+
+![Left sidebar of VS Code with testing shown](static/vscode_testing.png)
+
+All of these tests should be passing for you to get full points for correctness.
+
+If any tests do not pass, you can open the `test_intake_survey.py` file to see
+the output for each test, but the display can be hard to read. For easier
+reading, click the button at the top of the testing tab to show the test output
+in its own window (highlighted in red below):
+
+![Button to show test output](static/test_output.png)
+
+This will open a terminal window at the bottom of VS Code. You can scroll back
+through to see the test output.
+
+Reading and interpreting the test output can be a bit difficult depending on the
+error, and we will cover how to do this in a later assignment. For now, you can
+get help from the teaching team if you need help on how to diagnose and/or fix
+an error resulting in a failed test.
+
+## 3. Autoformat Your Code
+
+There are many ways to style your Python code - for example, some people prefer
+to leave whitespace around arithmetic operators and some prefer not to (e.g.,
+`2 + 2` vs `2+2`). Vast differences in style can make it difficult to read other
+people's code, so groups within the Python community have developed their own
+style guidelines to ensure consistency across projects.
+
+In this course, we mostly adhere to the
+[Black code style](https://black.readthedocs.io/en/stable/the_black_code_style/current_style.html)
+(totally optional to look at, unless you really, _really_ like to read style
+guides). If you're new to Python, it can be a lot of mental overhead to remember
+and follow all of the style rules, so we instead encourage you to make use of an
+autoformatter, which edits your code to match a certain style guide. (Tools like
+this are standard practice at good software communities and companies, as well.)
+
+In this course, we use an autoformatter called Black. If you have correctly set
+up VS Code as described earlier, this should run automatically when you save a
+file. Otherwise, run Black on your `intake_survey.py` file by opening a Terminal
+in Ubuntu, navigating to this directory, and running the command
+`black intake_survey.py`.
+
+## 4. Find and Fix Remaining Style Issues
+
+We just got done telling you how convenient an autoformatter can be, but there's
+something you should know: **an autoformatter doesn't always fix everything for
+you**. There are some issues that are simply too difficult to fix automatically.
+Therefore, even after you've run Black, you'll need to style-check your code to
+be sure that there aren't any lingering issues.
+
+For this purpose, we've provided you with a tool called Pylint. To run this,
+make sure you're in this directory in Terminal, and run the command
+`pylint intake_survey.py`. This will print out a list of style issues with your
+code file (if any), followed by a "style score" of your code out of 10.
+
+If Pylint reports any lingering errors, you should take some time to fix them.
+Most errors should be self-explanatory, but if you need additional help, you can
+ask the teaching team on Discord.
+
+## 5. Submit this Assignment
+
+Once you've done the above, you're ready to submit! Follow the steps below to
+get your changes into GitHub and submit your first assignment for this course.
+
+### 5.0. A Quick Note: Check Your Status Often
+
+At any point during these instructions, you can see what is going on in Git
+using the command `git status`. If anything goes wrong with Git, your first step
+should be to run `git status` to see what's going on.
+
+Now with that out of the way, let's move onto submitting your assignment.
+
+### 5.1. Stage Changes
+
+The first thing you'll need to do is to _stage_ your changes to
+`intake_survey.py`, which essentially tells Git to mark the current version of
+those file as part of your changes to commit. To do this, run the following
+command from this directory:
+
+```
+git add intake_survey.py
+```
+
+If it runs correctly, this command should produce no output, but `git status`
+should show modifications to `intake_survey.py` under "Changes to be committed"
+rather than under "Changes not staged for commit". (For this assignment, you can
+ignore other files that are listed as changed but not staged, such as this
+notebook file.)
+
+### 5.2. Commit Changes
+
+Next, _commit_ your changes to your copy of the repository, which packages up
+your staged files as a single unit of change to the repository. To do this, run
+the following command from this directory:
+
+```
+git commit
+```
+
+This should open VSCode with a file to type in. You should write a message in
+this file that describes the set of changes that you have made. While we won't
+be enforcing any strict guidelines for these messages, you should make sure that
+they are descriptive, because knowing what you changed and why is important when
+working with long-running or complex software projects. Based on our
+[guidelines in Reading 0](https://softdes.olin.edu/docs/readings/0-intro-to-assignments/#committing-your-changes),
+here is a template that we suggest you use:
+
+```
+Summarize change in 50 characters or less
+
+Longer description of change. Describe why you are making this change,
+as well as any outstanding issues. Maximum line length in this section
+should be 72 characters, as Git relies on this for nicely displaying
+this information back to you. This section is optional for simple
+changes.
+```
+
+Once you are done writing your commit message, save and close this file. You
+should then see a short message in the Terminal summarizing the commit. At this
+point, running `git status` should say something like "Your branch is ahead of
+'origin/main' by 1 commit." with potentially some other information.
+
+### 5.3. Push Changes
+
+Even though you've committed your changes to Git, these changes still only live
+in your local copy of the repository, that is, the copy of the repository on
+your computer. To make your submission visible to GitHub so that we can see and
+grade it, you'll need to _push_ your commit to GitHub.
+
+To push your commit, simply run the following command from this directory:
+
+```
+git push
+```
+
+If successful, this should also print some information about the status of the
+push (mostly information about transferring files and other data). At this
+point, running `git status` should again say something like "Your branch is up
+to date with 'origin/main'." when run.
+
+### 5.4. Get Commit Link on GitHub
+
+After completing Step 3, we are able to see your work for grading. However, it
+is easy to _think_ that your work has been submitted correctly when in reality,
+something has gone wrong. To avoid this, and to make sure that we grade the
+correct submission, you will need to submit a URL to a specific GitHub commit.
+
+To do this, navigate to your fork of the course repository **on GitHub**. There,
+you should see a link to your commit history like this (highlighted in red
+below):
+
+![Portion of repository page with commit history link](static/commit_history_link.png)
+
+Click on that link, and you should see a history of commits made to your
+repository in reverse chronological order. Find the commit that you just made -
+it should be the most recent commit, but you can use the commit message you
+wrote to make sure. In the box for that commit, click on the "commit hash", a
+short string of digits and letters that identifies the commit (highlighted in
+red below):
+
+![Portion of commit history page with commit link](static/commit_link.png)
+
+Copy the URL of that link. It should be something like
+https://github.com/USERNAME/softdes-20XX-YY/commit/69f4200844ffe4b219d6f373cd95ef3fc6f30269
+(with your username in place of `USERNAME` and the appropriate year and semester
+for the course).
+
+Finally, submit that link on Canvas for the appropriate feedback cycle. If this
+is your first time submitting this assignment, please use the "Initial
+Submission - Feedback Cycle XX" assignment on Canvas. Otherwise, use the
+"Resubmission - Feedback Cycle XX" assignment.
+
+Once you've done the above, take a moment to pat yourself on the back - you've
+just submitted your first (zeroeth) assignment in this course, and learned a lot
+about Python and Git along the way!

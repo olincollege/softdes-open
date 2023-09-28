@@ -1,0 +1,18 @@
+---
+jupyter: python3
+execute:
+  enabled: false
+---
+
+# Title Here
+
+Author: **YOUR NAME HERE**
+
+Run the cell below each time the notebook is started or restarted to
+ensure that if you change any code in the library, this notebook will
+use the latest version of the library code.
+
+```{python}
+%load_ext autoreload
+%autoreload 2
+```

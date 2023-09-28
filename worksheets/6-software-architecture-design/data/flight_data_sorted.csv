@@ -1,0 +1,467 @@
+D,Washington,DCA,00:00,AA2139,American Airlines,B
+A,Minneapolis,MSP,00:09,AF2718,Air France,A
+A,Minneapolis,MSP,00:09,DL1008,Delta Air Lines,A
+A,Minneapolis,MSP,00:09,KE3495,Korean Air,A
+A,Minneapolis,MSP,00:09,WS6860,WestJet,A
+A,Augusta,AUG,00:10,9K1002,Cape Air,C
+A,Augusta,AUG,00:10,B65112,JetBlue Airways,C
+D,Porto,OPO,00:10,TP9574,TAP Air Portugal,
+A,Charlotte,CLT,00:16,AA1902,American Airlines,B
+D,Bar Harbor,BHB,00:20,9K1833,Cape Air,C
+D,Bar Harbor,BHB,00:20,B65125,JetBlue Airways,C
+A,Lebanon,LEB,00:20,9K1874,Cape Air,C
+A,Lebanon,LEB,00:20,B65399,JetBlue Airways,C
+A,Rockland,RKD,00:20,9K1854,Cape Air,C
+A,Rockland,RKD,00:20,B65162,JetBlue Airways,C
+A,Philadelphia,PHL,00:24,AA1139,American Airlines,B
+D,Dallas,DFW,00:25,AA2747,American Airlines,B
+D,Dallas,DFW,00:25,QF4563,Qantas,B
+A,Dulles,IAD,00:27,AV2022,SA AVIANCA,B
+A,Dulles,IAD,00:27,ET1356,Ethiopian Airlines,B
+A,Dulles,IAD,00:27,SA7428,South African Airways,B
+A,Dulles,IAD,00:27,SK6709,SAS,B
+A,Dulles,IAD,00:27,UA2060,United Airlines,B
+D,Newark,EWR,00:30,SK6781,SAS,B
+D,Newark,EWR,00:30,TP8515,TAP Air Portugal,B
+D,Newark,EWR,00:30,UA249,United Airlines,B
+D,Westhampton Beach,FOK,00:30,1I731,NetJets Aviation,
+A,Chicago,ORD,00:36,NZ2083,Air New Zealand,B
+A,Chicago,ORD,00:36,UA1572,United Airlines,B
+A,Nantucket,ACK,00:38,1I504,NetJets Aviation,
+D,Orlando,MCO,00:39,F91239,Frontier Airlines,E
+D,Buffalo,BUF,00:40,B62215,JetBlue Airways,C
+D,Buffalo,BUF,00:40,HA2393,Hawaiian Airlines,C
+D,Detroit,DTW,00:40,DL692,Delta Air Lines,A
+D,Detroit,DTW,00:40,KE3384,Korean Air,A
+D,Detroit,DTW,00:40,KL6273,KLM,A
+A,Greensboro/High Point,GSO,00:42,XOJ548,XOJET,
+A,Raleigh/Durham,RDU,00:44,B61384,JetBlue Airways,C
+A,Raleigh/Durham,RDU,00:44,EI5231,Aer Lingus,C
+A,Raleigh/Durham,RDU,00:44,HA2474,Hawaiian Airlines,C
+A,Raleigh/Durham,RDU,00:44,QR4019,Qatar Airways,C
+A,Raleigh/Durham,RDU,00:44,TP4362,TAP Air Portugal,C
+A,Atlanta,ATL,00:45,DL411,Delta Air Lines,A
+D,Charlotte,CLT,00:45,AA584,American Airlines,B
+D,Lebanon,LEB,00:45,9K1875,Cape Air,C
+D,Lebanon,LEB,00:45,B65170,JetBlue Airways,C
+D,Saranac Lake,SLK,00:45,9K1033,Cape Air,C
+D,Saranac Lake,SLK,00:45,B65930,JetBlue Airways,C
+A,Amsterdam,AMS,00:51,AF8983,Air France,E
+A,Amsterdam,AMS,00:51,DL259,Delta Air Lines,E
+A,Amsterdam,AMS,00:51,KL6017,KLM,E
+A,Amsterdam,AMS,00:51,VS3952,Virgin Atlantic,E
+A,London,LHR,00:53,AF3610,Air France,E
+A,London,LHR,00:53,DL59,Delta Air Lines,E
+A,London,LHR,00:53,KL6187,KLM,E
+A,London,LHR,00:53,VS4011,Virgin Atlantic,E
+A,Miami,MIA,00:57,AA1099,American Airlines,B
+A,Miami,MIA,00:57,G36029,Gol,B
+D,Dulles,IAD,13:00,1I678,NetJets Aviation,
+D,Fort Myers,RSW,13:00,B61165,JetBlue Airways,C
+D,Fort Myers,RSW,13:00,HA2467,Hawaiian Airlines,C
+D,Rochester,ROC,13:00,B6713,JetBlue Airways,C
+A,Raleigh/Durham,RDU,13:03,AF2842,Air France,A
+A,Raleigh/Durham,RDU,13:03,DL5612,Delta Air Lines,A
+A,Teterboro,TEB,13:07,1I516,NetJets Aviation,
+A,Saranac Lake,SLK,13:15,9K1030,Cape Air,C
+A,Saranac Lake,SLK,13:15,B65130,JetBlue Airways,C
+D,Seoul,ICN,13:15,DL7668,Delta Air Lines,E
+D,Seoul,ICN,13:15,KE92,Korean Air,E
+D,Philadelphia,PHL,13:19,AA1898,American Airlines,B
+D,Atlanta,ATL,13:20,B6697,JetBlue Airways,C
+D,Atlanta,ATL,13:20,HA2167,Hawaiian Airlines,C
+A,Rutland,RUT,13:23,9K60,Cape Air,C
+A,Rutland,RUT,13:23,B65102,JetBlue Airways,C
+A,Nashville,BNA,13:24,AF2220,Air France,A
+A,Nashville,BNA,13:24,DL5601,Delta Air Lines,A
+A,Nashville,BNA,13:24,KE3314,Korean Air,A
+A,San Juan,SJU,13:25,NK2325,Spirit Airlines,B
+D,Augusta,AUG,13:30,9K1003,Cape Air,C
+D,Augusta,AUG,13:30,B65113,JetBlue Airways,C
+D,Tokyo,NRT,13:30,AA8475,American Airlines,E
+D,Tokyo,NRT,13:30,JL7,JAL,E
+D,Tokyo,NRT,13:30,LA7487,LATAM Airlines,E
+D,Tokyo,NRT,13:30,MH9107,Malaysia Airlines,E
+A,Charlotte,CLT,13:32,B6218,JetBlue Airways,C
+A,Charlotte,CLT,13:32,EI5129,Aer Lingus,C
+A,Charlotte,CLT,13:32,HA2416,Hawaiian Airlines,C
+A,Charlotte,CLT,13:32,QR3976,Qatar Airways,C
+A,Charlotte,CLT,13:32,TP4274,TAP Air Portugal,C
+A,Fort Myers,RSW,13:34,B6466,JetBlue Airways,C
+A,Fort Myers,RSW,13:34,EI5255,Aer Lingus,C
+A,Fort Myers,RSW,13:34,HA2488,Hawaiian Airlines,C
+A,Fort Myers,RSW,13:34,QR4031,Qatar Airways,C
+A,Fort Myers,RSW,13:34,TP4370,TAP Air Portugal,C
+A,Dallas,DFW,13:37,AA1497,American Airlines,B
+A,Orlando,MCO,13:37,NK432,Spirit Airlines,B
+D,San Francisco,SFO,13:45,NZ9021,Air New Zealand,B
+D,San Francisco,SFO,13:45,UA210,United Airlines,B
+D,Tampa,TPA,13:46,B691,JetBlue Airways,C
+D,Tampa,TPA,13:46,HA2473,Hawaiian Airlines,C
+D,Rutland,RUT,13:50,9K63,Cape Air,C
+D,Rutland,RUT,13:50,B65103,JetBlue Airways,C
+A,Charlotte,CLT,13:52,AA1320,American Airlines,B
+A,Richmond,RIC,13:52,B6382,JetBlue Airways,C
+A,Richmond,RIC,13:52,EI5239,Aer Lingus,C
+A,Richmond,RIC,13:52,FI7882,Icelandair,C
+A,Richmond,RIC,13:52,QR4190,Qatar Airways,C
+A,Richmond,RIC,13:52,TP4366,TAP Air Portugal,C
+A,Orlando,MCO,13:55,B61552,JetBlue Airways,C
+A,Orlando,MCO,13:55,EI5175,Aer Lingus,C
+A,Orlando,MCO,13:55,FI7814,Icelandair,C
+A,Orlando,MCO,13:55,HA2442,Hawaiian Airlines,C
+A,Orlando,MCO,13:55,QR4007,Qatar Airways,C
+A,Orlando,MCO,13:55,TP4472,TAP Air Portugal,C
+A,Philadelphia,PHL,13:55,AA2769,American Airlines,B
+D,New York,JFK,13:59,AF2588,Air France,A
+D,New York,JFK,13:59,AZ5916,Alitalia,A
+D,New York,JFK,13:59,DL5633,Delta Air Lines,A
+D,New York,JFK,13:59,KE3936,Korean Air,A
+D,New York,JFK,13:59,KL5741,KLM,A
+D,New York,JFK,13:59,LA6115,LATAM Airlines,A
+D,New York,JFK,13:59,VS3093,Virgin Atlantic,A
+D,New York,JFK,13:59,WS6841,WestJet,A
+D,Atlanta,ATL,14:05,AF2262,Air France,A
+D,Atlanta,ATL,14:05,AM3258,Aeromexico,A
+D,Atlanta,ATL,14:05,DL377,Delta Air Lines,A
+D,Atlanta,ATL,14:05,KE3162,Korean Air,A
+D,Atlanta,ATL,14:05,KL5329,KLM,A
+D,Atlanta,ATL,14:05,VS4213,Virgin Atlantic,A
+A,Baltimore,BWI,14:05,WN140,Southwest Airlines,B
+A,Dubai,DXB,14:05,EK237,Emirates,E
+A,Massena,MSS,14:05,4B863,Boutique Air,
+D,Phoenix,PHX,14:05,AA1057,American Airlines,B
+A,Washington,DCA,14:11,AA2149,American Airlines,B
+A,Lebanon,LEB,14:13,9K1876,Cape Air,C
+A,Lebanon,LEB,14:13,B65171,JetBlue Airways,C
+D,Minneapolis,MSP,14:15,DL1036,Delta Air Lines,A
+D,Minneapolis,MSP,14:15,KE3166,Korean Air,A
+D,Minneapolis,MSP,14:15,WS6500,WestJet,A
+A,Nashville,BNA,14:15,WN183,Southwest Airlines,B
+D,Rockland,RKD,14:15,9K1855,Cape Air,C
+D,Rockland,RKD,14:15,B65163,JetBlue Airways,C
+A,Chicago,ORD,14:19,B61712,JetBlue Airways,C
+A,Chicago,ORD,14:19,FI7860,Icelandair,C
+A,Chicago,ORD,14:19,HA2200,Hawaiian Airlines,C
+A,Chicago,ORD,14:19,QR3885,Qatar Airways,C
+A,Chicago,ORD,14:19,TP4474,TAP Air Portugal,C
+D,Cleveland,CLE,14:20,B61641,JetBlue Airways,C
+D,Cleveland,CLE,14:20,HA2405,Hawaiian Airlines,C
+A,Chicago,ORD,14:21,NH7480,ANA,B
+A,Chicago,ORD,14:21,NZ2085,Air New Zealand,B
+A,Chicago,ORD,14:21,UA301,United Airlines,B
+A,Richmond,RIC,14:21,AF2088,Air France,A
+A,Richmond,RIC,14:21,DL5656,Delta Air Lines,A
+A,Richmond,RIC,14:21,KL8656,KLM,A
+D,Raleigh/Durham,RDU,14:25,DL5655,Delta Air Lines,A
+D,Raleigh/Durham,RDU,14:25,KE3976,Korean Air,A
+D,Raleigh/Durham,RDU,14:25,KL6332,KLM,A
+D,Raleigh/Durham,RDU,14:25,VS4215,Virgin Atlantic,A
+D,Baltimore,BWI,14:30,NK222,Spirit Airlines,B
+D,Carlsbad,CLD,14:30,XOJ548,XOJET,
+D,Farmingdale,FRG,14:30,1I504,NetJets Aviation,
+A,Houston,IAH,14:30,AD7030,Azul,B
+A,Houston,IAH,14:30,NZ6392,Air New Zealand,B
+A,Houston,IAH,14:30,SK6704,SAS,B
+A,Houston,IAH,14:30,UA2426,United Airlines,B
+A,Nantucket,ACK,14:30,9K5041,Cape Air,
+D,Orlando,MCO,14:30,NK433,Spirit Airlines,B
+A,Los Angeles,LAX,14:31,B6288,JetBlue Airways,C
+A,Los Angeles,LAX,14:31,HA2312,Hawaiian Airlines,C
+A,Los Angeles,LAX,14:31,QR3854,Qatar Airways,C
+A,Los Angeles,LAX,14:31,TP4324,TAP Air Portugal,C
+D,Detroit,DTW,14:33,B6537,JetBlue Airways,C
+D,Detroit,DTW,14:33,HA2417,Hawaiian Airlines,C
+D,Lebanon,LEB,14:38,9K1879,Cape Air,C
+D,Lebanon,LEB,14:38,B65172,JetBlue Airways,C
+D,Charlotte,CLT,14:41,AA1320,American Airlines,B
+A,New York,LGA,14:47,1I408,NetJets Aviation,
+D,Philadelphia,PHL,14:48,AA1041,American Airlines,B
+D,Massena,MSS,14:50,4B864,Boutique Air,
+D,Nashville,BNA,14:50,WN140,Southwest Airlines,B
+A,Paris,CDG,14:55,AF334,Air France,E
+A,Paris,CDG,14:55,AZ3535,Alitalia,E
+A,Paris,CDG,14:55,DL8604,Delta Air Lines,E
+A,Paris,CDG,14:55,KL2305,KLM,E
+A,Paris,CDG,14:55,VS6752,Virgin Atlantic,E
+A,New Orleans,MSY,14:58,B6400,JetBlue Airways,C
+A,New Orleans,MSY,14:58,EI5179,Aer Lingus,C
+A,New Orleans,MSY,14:58,QR4117,Qatar Airways,C
+A,New Orleans,MSY,14:58,TP4336,TAP Air Portugal,C
+D,Fort Lauderdale,FLL,14:59,B62269,JetBlue Airways,C
+D,Fort Lauderdale,FLL,14:59,HA2427,Hawaiian Airlines,C
+D,Baltimore,BWI,15:00,WN183,Southwest Airlines,B
+D,Dulles,IAD,15:00,LH7451,Lufthansa,B
+D,Dulles,IAD,15:00,SN8899,Brussels Airlines,B
+D,Dulles,IAD,15:00,UA511,United Airlines,B
+D,Nantucket,ACK,15:00,9K5211,Cape Air,C
+D,Newark,EWR,15:00,SK6779,SAS,B
+D,Newark,EWR,15:00,TP8511,TAP Air Portugal,B
+D,Newark,EWR,15:00,UA2248,United Airlines,B
+D,San Juan,SJU,15:00,B6261,JetBlue Airways,C
+D,Washington,DCA,15:00,AA2150,American Airlines,B
+A,Atlanta,ATL,15:02,DL407,Delta Air Lines,A
+A,Atlanta,ATL,15:02,KE3148,Korean Air,A
+A,Atlanta,ATL,15:02,KL7188,KLM,A
+A,Fort Lauderdale,FLL,15:03,NK616,Spirit Airlines,B
+A,Nantucket,ACK,15:03,9K202,Cape Air,C
+A,Nantucket,ACK,15:03,B65923,JetBlue Airways,C
+A,West Palm Beach,PBI,15:04,B6122,JetBlue Airways,C
+A,West Palm Beach,PBI,15:04,EI5189,Aer Lingus,C
+A,West Palm Beach,PBI,15:04,HA2204,Hawaiian Airlines,C
+A,West Palm Beach,PBI,15:04,QR3824,Qatar Airways,C
+A,West Palm Beach,PBI,15:04,TP4344,TAP Air Portugal,C
+D,Pittsburgh,PIT,15:06,B61685,JetBlue Airways,C
+D,Pittsburgh,PIT,15:06,HA2455,Hawaiian Airlines,C
+A,Charleston,CHS,15:07,B668,JetBlue Airways,C
+A,Charleston,CHS,15:07,EI5119,Aer Lingus,C
+A,Charleston,CHS,15:07,HA2328,Hawaiian Airlines,C
+A,Charleston,CHS,15:07,QR3842,Qatar Airways,C
+A,Charleston,CHS,15:07,TP4490,TAP Air Portugal,C
+A,Minneapolis,MSP,15:08,B6836,JetBlue Airways,C
+A,Minneapolis,MSP,15:08,EI5382,Aer Lingus,C
+A,Minneapolis,MSP,15:08,QR3984,Qatar Airways,C
+A,Minneapolis,MSP,15:08,TP4334,TAP Air Portugal,C
+D,Martha's Vineyard,MVY,15:10,9K3271,Cape Air,
+D,Raleigh/Durham,RDU,15:15,B62783,JetBlue Airways,C
+D,Raleigh/Durham,RDU,15:15,HA2219,Hawaiian Airlines,C
+A,Philadelphia,PHL,15:19,AA1899,American Airlines,B
+A,Orlando,MCO,15:20,AF2351,Air France,A
+A,Orlando,MCO,15:20,DL2055,Delta Air Lines,A
+A,Orlando,MCO,15:20,KE3991,Korean Air,A
+A,Orlando,MCO,15:20,KL7707,KLM,A
+D,Miami,MIA,15:23,AA1170,American Airlines,B
+D,Miami,MIA,15:23,G36142,Gol,B
+D,Miami,MIA,15:23,IB4865,Iberia,B
+D,Houston,IAH,15:25,AD7031,Azul,B
+D,Houston,IAH,15:25,NZ6404,Air New Zealand,B
+D,Houston,IAH,15:25,UA250,United Airlines,B
+A,Tampa,TPA,15:29,B6892,JetBlue Airways,C
+A,Tampa,TPA,15:29,FI7848,Icelandair,C
+A,Tampa,TPA,15:29,HA2482,Hawaiian Airlines,C
+A,Tampa,TPA,15:29,QR4259,Qatar Airways,C
+A,Tampa,TPA,15:29,TP4402,TAP Air Portugal,C
+D,Hyannis,HYA,15:30,9K7171,Cape Air,C
+D,Hyannis,HYA,15:30,B65904,JetBlue Airways,C
+D,New York,LGA,15:30,DL5813,Delta Air Lines,A
+D,New York,LGA,15:30,KE3968,Korean Air,A
+D,New York,LGA,15:30,KL5904,KLM,A
+D,New York,LGA,15:30,VS3277,Virgin Atlantic,A
+D,New York,LGA,15:30,WS7567,WestJet,A
+D,Dallas,DFW,15:31,AA1094,American Airlines,B
+D,Dallas,DFW,15:31,QF4516,Qantas,B
+D,Chicago,ORD,15:35,B62711,JetBlue Airways,C
+D,Chicago,ORD,15:35,HA2205,Hawaiian Airlines,C
+D,Chicago,ORD,15:35,LY8546,El Al,C
+D,Chicago,ORD,15:35,QR4053,Qatar Airways,C
+A,Charlotte,CLT,15:37,AA471,American Airlines,B
+A,Seattle,SEA,15:40,AS12,Alaska Airlines,B
+A,Denver,DEN,15:41,SK6702,SAS,B
+A,Denver,DEN,15:41,UA385,United Airlines,B
+A,Dublin,DUB,15:45,BA6137,British Airways,C
+A,Dublin,DUB,15:45,EI137,Aer Lingus,C
+A,Dublin,DUB,15:45,EY7977,Etihad Airways,C
+A,Dublin,DUB,15:45,UA7637,United Airlines,C
+A,Cleveland,CLE,15:46,DL5602,Delta Air Lines,A
+A,Cleveland,CLE,15:46,KL8538,KLM,A
+A,Dallas,DFW,15:47,AA1853,American Airlines,B
+A,Dallas,DFW,15:47,QF4520,Qantas,B
+A,Jacksonville,JAX,15:52,B61210,JetBlue Airways,C
+A,Jacksonville,JAX,15:52,EI5153,Aer Lingus,C
+A,Jacksonville,JAX,15:52,HA2434,Hawaiian Airlines,C
+A,Jacksonville,JAX,15:52,QR4213,Qatar Airways,C
+A,Jacksonville,JAX,15:52,TP4298,TAP Air Portugal,C
+D,Denver,DEN,15:54,UA448,United Airlines,B
+A,Detroit,DTW,15:55,AF2153,Air France,A
+A,Detroit,DTW,15:55,DL1120,Delta Air Lines,A
+A,Detroit,DTW,15:55,KE3177,Korean Air,A
+A,Detroit,DTW,15:55,KL5060,KLM,A
+D,Los Angeles,LAX,15:55,B6687,JetBlue Airways,C
+D,Los Angeles,LAX,15:55,EK6057,Emirates,C
+D,Los Angeles,LAX,15:55,HA2343,Hawaiian Airlines,C
+A,Zurich,ZRH,15:55,LX54,SWISS,E
+A,Zurich,ZRH,15:55,UA9804,United Airlines,E
+A,Provincetown,PVC,16:00,9K2281,Cape Air,C
+A,Provincetown,PVC,16:00,B65934,JetBlue Airways,C
+D,San Juan,SJU,16:00,NK2326,Spirit Airlines,B
+D,Washington,DCA,16:00,B6889,JetBlue Airways,C
+D,Washington,DCA,16:00,EK6017,Emirates,C
+D,Washington,DCA,16:00,HA2145,Hawaiian Airlines,C
+D,Washington,DCA,16:00,QR3805,Qatar Airways,C
+A,Seattle,SEA,16:02,DL331,Delta Air Lines,A
+A,Seattle,SEA,16:02,KL6753,KLM,A
+A,Frankfurt,FRA,16:05,AC9451,Air Canada,E
+A,Frankfurt,FRA,16:05,LH422,Lufthansa,E
+A,Frankfurt,FRA,16:05,SN7238,Brussels Airlines,E
+A,Frankfurt,FRA,16:05,UA8853,United Airlines,E
+D,Orlando,MCO,16:05,B62251,JetBlue Airways,C
+D,Orlando,MCO,16:05,EK6065,Emirates,C
+D,Orlando,MCO,16:05,HA2199,Hawaiian Airlines,C
+D,Orlando,MCO,16:05,QR4000,Qatar Airways,C
+A,Toronto,YYZ,16:08,AC7672,Air Canada,B
+A,Toronto,YYZ,16:08,UA8536,United Airlines,B
+A,Sarasota,SRQ,16:09,B6940,JetBlue Airways,C
+A,Sarasota,SRQ,16:09,QR4121,Qatar Airways,C
+A,Santiago,STI,16:10,B62724,JetBlue Airways,E
+A,Santiago,STI,16:10,EK6134,Emirates,E
+D,Philadelphia,PHL,16:12,AA1899,American Airlines,B
+A,Bar Harbor,BHB,16:15,9K1838,Cape Air,C
+A,Bar Harbor,BHB,16:15,B65126,JetBlue Airways,C
+A,Buffalo,BUF,16:15,B62016,JetBlue Airways,C
+A,Buffalo,BUF,16:15,EI5099,Aer Lingus,C
+A,Buffalo,BUF,16:15,HA2392,Hawaiian Airlines,C
+A,Buffalo,BUF,16:15,QR3990,Qatar Airways,C
+A,Buffalo,BUF,16:15,TP4263,TAP Air Portugal,C
+A,New York,JFK,16:15,AF2123,Air France,A
+A,New York,JFK,16:15,AZ3151,Alitalia,A
+A,New York,JFK,16:15,DL4862,Delta Air Lines,A
+A,New York,JFK,16:15,KE3942,Korean Air,A
+A,New York,JFK,16:15,KL5690,KLM,A
+A,New York,JFK,16:15,UX3303,Air Europa,A
+A,New York,JFK,16:15,VS1989,Virgin Atlantic,A
+A,New York,JFK,16:15,WS6766,WestJet,A
+A,Salt Lake City,SLC,16:16,DL763,Delta Air Lines,A
+A,Salt Lake City,SLC,16:16,KL6750,KLM,A
+A,Rochester,ROC,16:19,B6712,JetBlue Airways,C
+A,Rochester,ROC,16:19,QR3814,Qatar Airways,C
+A,Rochester,ROC,16:19,TP4275,TAP Air Portugal,C
+A,Fort Myers,RSW,16:20,B6766,JetBlue Airways,C
+A,Fort Myers,RSW,16:20,EI5245,Aer Lingus,C
+A,Fort Myers,RSW,16:20,HA2222,Hawaiian Airlines,C
+A,Fort Myers,RSW,16:20,QR3840,Qatar Airways,C
+A,Fort Myers,RSW,16:20,TP4410,TAP Air Portugal,C
+D,Atlanta,ATL,16:22,AF3729,Air France,A
+D,Atlanta,ATL,16:22,DL398,Delta Air Lines,A
+D,Atlanta,ATL,16:22,KE3684,Korean Air,A
+D,Atlanta,ATL,16:22,KL5693,KLM,A
+D,Atlanta,ATL,16:22,VS4243,Virgin Atlantic,A
+A,Augusta,AUG,16:25,9K1006,Cape Air,C
+A,Augusta,AUG,16:25,B65116,JetBlue Airways,C
+D,Bar Harbor,BHB,16:25,9K1837,Cape Air,C
+D,Bar Harbor,BHB,16:25,B65159,JetBlue Airways,C
+D,Charlotte,CLT,16:28,AA1453,American Airlines,B
+A,Los Angeles,LAX,16:30,B62288,JetBlue Airways,C
+A,Los Angeles,LAX,16:30,DL318,Delta Air Lines,A
+A,Los Angeles,LAX,16:30,FI7864,Icelandair,C
+A,Los Angeles,LAX,16:30,HA2316,Hawaiian Airlines,C
+A,Los Angeles,LAX,16:30,KL7471,KLM,A
+A,Los Angeles,LAX,16:30,QR3812,Qatar Airways,C
+A,Los Angeles,LAX,16:30,TP4412,TAP Air Portugal,C
+A,Minneapolis,MSP,16:35,DL1003,Delta Air Lines,A
+A,Minneapolis,MSP,16:35,WS6857,WestJet,A
+A,Chicago,ORD,16:39,AA2321,American Airlines,B
+D,Chicago,ORD,16:41,AA1109,American Airlines,B
+D,Chicago,ORD,16:41,AS4268,Alaska Airlines,B
+D,Chicago,ORD,16:41,BA4361,British Airways,B
+A,Nashville,BNA,16:42,B61806,JetBlue Airways,C
+A,Nashville,BNA,16:42,HA2382,Hawaiian Airlines,C
+A,Nashville,BNA,16:42,QR4293,Qatar Airways,C
+A,Nashville,BNA,16:42,TP4256,TAP Air Portugal,C
+A,San Francisco,SFO,16:42,B6434,JetBlue Airways,C
+A,San Francisco,SFO,16:42,FI7896,Icelandair,C
+A,San Francisco,SFO,16:42,HA2356,Hawaiian Airlines,C
+A,San Francisco,SFO,16:42,QR4043,Qatar Airways,C
+A,San Francisco,SFO,16:42,TP4394,TAP Air Portugal,C
+A,Charleston,CHS,16:44,DL5628,Delta Air Lines,A
+A,Charleston,CHS,16:44,KE3324,Korean Air,A
+A,Charleston,CHS,16:44,KL6679,KLM,A
+D,Seattle,SEA,16:45,AS15,Alaska Airlines,B
+A,Austin,AUS,16:46,B61138,JetBlue Airways,C
+A,Austin,AUS,16:46,QR4227,Qatar Airways,C
+A,New York,LGA,16:49,DL5650,Delta Air Lines,A
+A,New York,LGA,16:49,KL5771,KLM,A
+A,New York,LGA,16:49,WS7789,WestJet,A
+A,Martha's Vineyard,MVY,16:50,9K3421,Cape Air,C
+A,Martha's Vineyard,MVY,16:50,B65985,JetBlue Airways,C
+A,Newark,EWR,16:52,SK6878,SAS,B
+A,Newark,EWR,16:52,UA402,United Airlines,B
+D,Chicago,ORD,16:55,NZ2090,Air New Zealand,B
+D,Chicago,ORD,16:55,UA503,United Airlines,B
+A,Los Angeles,LAX,16:59,NZ9440,Air New Zealand,B
+A,Los Angeles,LAX,16:59,UA1423,United Airlines,B
+A,Atlanta,ATL,17:00,DL433,Delta Air Lines,A
+A,Atlanta,ATL,17:00,KE6839,Korean Air,A
+A,Atlanta,ATL,17:00,KL7168,KLM,A
+A,Rockland,RKD,17:00,9K1856,Cape Air,C
+A,Rockland,RKD,17:00,B65165,JetBlue Airways,C
+A,Saranac Lake,SLK,17:05,9K1034,Cape Air,C
+A,Saranac Lake,SLK,17:05,B65931,JetBlue Airways,C
+A,Fort Lauderdale,FLL,17:06,B670,JetBlue Airways,C
+A,Fort Lauderdale,FLL,17:06,EI5143,Aer Lingus,C
+A,Fort Lauderdale,FLL,17:06,HA2168,Hawaiian Airlines,C
+A,Fort Lauderdale,FLL,17:06,QR4217,Qatar Airways,C
+A,Fort Lauderdale,FLL,17:06,TP4288,TAP Air Portugal,C
+A,Rutland,RUT,17:08,9K70,Cape Air,C
+A,Rutland,RUT,17:08,B65104,JetBlue Airways,C
+D,New York,JFK,17:10,DL4854,Delta Air Lines,A
+D,New York,JFK,17:10,KE3935,Korean Air,A
+D,New York,JFK,17:10,KL5423,KLM,A
+D,New York,JFK,17:10,UX3313,Air Europa,A
+D,New York,JFK,17:10,VS2715,Virgin Atlantic,A
+D,New York,JFK,17:10,WS6495,WestJet,A
+D,Toronto,YYZ,17:10,AC7677,Air Canada,B
+D,Toronto,YYZ,17:10,TK8679,Turkish Airlines,B
+D,Toronto,YYZ,17:10,UA8529,United Airlines,B
+D,Provincetown,PVC,17:11,9K2331,Cape Air,C
+D,Provincetown,PVC,17:11,B65132,JetBlue Airways,C
+A,Washington,DCA,17:11,AA2148,American Airlines,B
+A,San Francisco,SFO,17:16,NZ9010,Air New Zealand,B
+A,San Francisco,SFO,17:16,UA2068,United Airlines,B
+D,Seattle,SEA,17:17,AF2184,Air France,A
+D,Seattle,SEA,17:17,DL304,Delta Air Lines,A
+D,Seattle,SEA,17:17,KE3010,Korean Air,A
+D,Seattle,SEA,17:17,VS5349,Virgin Atlantic,A
+A,Dallas,DFW,17:18,B61214,JetBlue Airways,C
+A,Dallas,DFW,17:18,FI7868,Icelandair,C
+A,Dallas,DFW,17:18,QR4264,Qatar Airways,C
+A,Dallas,DFW,17:18,TP4282,TAP Air Portugal,C
+D,Martha's Vineyard,MVY,17:20,9K3291,Cape Air,C
+D,Martha's Vineyard,MVY,17:20,B65150,JetBlue Airways,C
+D,Paris,CDG,17:20,AF333,Air France,E
+D,Paris,CDG,17:20,AZ3536,Alitalia,E
+D,Paris,CDG,17:20,DL8399,Delta Air Lines,E
+D,Paris,CDG,17:20,KL2210,KLM,E
+D,Paris,CDG,17:20,VS6746,Virgin Atlantic,E
+A,Charlotte,CLT,17:21,AA1728,American Airlines,B
+A,Phoenix,PHX,17:22,AA1569,American Airlines,B
+A,San Francisco,SFO,17:25,AS1352,Alaska Airlines,B
+A,San Francisco,SFO,17:25,FJ5862,Fiji Airways,B
+A,San Francisco,SFO,17:25,SQ1350,Singapore Airlines,B
+D,Philadelphia,PHL,17:30,AA2395,American Airlines,B
+A,Dallas,DFW,17:32,AA1148,American Airlines,B
+A,Dallas,DFW,17:32,QF4554,Qantas,B
+D,Augusta,AUG,17:35,9K1007,Cape Air,C
+D,Augusta,AUG,17:35,B65117,JetBlue Airways,C
+D,Saranac Lake,SLK,17:35,9K1037,Cape Air,C
+D,Saranac Lake,SLK,17:35,B65137,JetBlue Airways,C
+D,Detroit,DTW,17:36,AF2317,Air France,A
+D,Detroit,DTW,17:36,DL752,Delta Air Lines,A
+D,Detroit,DTW,17:36,VS4203,Virgin Atlantic,A
+A,Savannah,SAV,17:39,B6250,JetBlue Airways,C
+A,Savannah,SAV,17:39,HA2478,Hawaiian Airlines,C
+A,Savannah,SAV,17:39,QR4137,Qatar Airways,C
+A,Savannah,SAV,17:39,TP4382,TAP Air Portugal,C
+A,Lebanon,LEB,17:40,9K1880,Cape Air,C
+A,Lebanon,LEB,17:40,B65173,JetBlue Airways,C
+D,Salt Lake City,SLC,17:40,AF2561,Air France,A
+D,Salt Lake City,SLC,17:40,DL690,Delta Air Lines,A
+D,Salt Lake City,SLC,17:40,KE3978,Korean Air,A
+D,Salt Lake City,SLC,17:40,VS3096,Virgin Atlantic,A
+A,Chicago,ORD,17:43,NH7786,ANA,B
+A,Chicago,ORD,17:43,NZ2087,Air New Zealand,B
+A,Chicago,ORD,17:43,SK9757,SAS,B
+A,Chicago,ORD,17:43,UA664,United Airlines,B
+D,Frankfurt,FRA,17:50,AC9452,Air Canada,E
+D,Frankfurt,FRA,17:50,LH423,Lufthansa,E
+D,Frankfurt,FRA,17:50,SN7239,Brussels Airlines,E
+D,Frankfurt,FRA,17:50,UA8852,United Airlines,E
+A,San Juan,SJU,17:53,B6462,JetBlue Airways,C
+A,San Juan,SJU,17:53,QR4261,Qatar Airways,C
+A,San Juan,SJU,17:53,TP4458,TAP Air Portugal,C
+A,Baltimore,BWI,17:55,WN950,Southwest Airlines,B
+D,Minneapolis,MSP,17:55,DL956,Delta Air Lines,A
+D,Minneapolis,MSP,17:55,VS4225,Virgin Atlantic,A
+D,Minneapolis,MSP,17:55,WS6496,WestJet,A
+D,Rutland,RUT,17:55,9K71,Cape Air,C
+D,Rutland,RUT,17:55,B65105,JetBlue Airways,C
+A,Santo Domingo,SDQ,17:58,B62830,JetBlue Airways,E

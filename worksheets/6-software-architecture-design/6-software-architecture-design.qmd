@@ -1,0 +1,141 @@
+---
+jupyter: python3
+execute:
+  enabled: false
+---
+
+# Worksheet 6: Composition, Inheritance, and MVC
+
+This worksheet is designed to help you dive deeper into some of the topics we
+covered in Reading 6. The reading focuses more on software architecture design
+than implementation itself, and as such, both this worksheet and the assignment
+for this module will focus more on design rather than implementation. That
+being said, you still have to write a bit of code - it just plays a supporting
+role.
+
+## 6.0. Warmup: Composition with Cards
+
+This warmup is designed to get you thinking about class design in the context
+of a larger application. It has been broken into several smaller steps, each of
+which involves designing an application at a different level of abstraction.
+
+### 6.0.1. Deck of Cards
+
+To start, suppose that you want to create a game that uses playing cards, like
+Poker, Solitaire, or Bridge. At the center of all of these games is a standard
+52-card deck of playing cards. Your main task in this warmup is to design a
+class to represent a deck of playing cards.
+
+For the first part of this warmup, think about what this class is composed of,
+that is, what attributes it has. If it contains other classes in some way, you
+should also think about what those classes may be composed of, if they have
+attributes.
+
+Write your answer in the cell below.
+
+#### Solution
+
+```markdown
+* Write your answer here.
+```
+
+### 6.0.2. Let's Shuffle Things Up
+
+As we mentioned in the reading, composition on its own is simply about setting
+instance attributes in a class. The challenge of composition lies in finding
+the right level of abstraction, and this depends on the application you're
+trying to implement. So now, let's think about how a specific application might
+affect the levels of abstraction we chose above.
+
+Suppose now that you want to use this deck of cards to implement a game of
+Poker. For this part of the warmup, focus on two features of the game:
+displaying cards to the user, and comparing cards.
+
+For displaying cards to the user, we can start with a simple text description
+of each card: "2 of Clubs" or "Ace of Spades", for example. Depending on how
+you designed your playing cards class above, this task may be straightforward
+or a bit more involved.
+
+For comparing cards, you'll need a bit of familiarity with how Poker
+works. There is a ranking of five-card Poker hands - for example, five cards
+all of the same suit (a flush) will beat a hand with three cards of the same
+number (three of a kind), which in turn will beat a hand with two different
+pairs of numbers (two pair). If two players have the same type of hand - for
+example, if two players both have a single pair of cards and no other matched
+cards - the value of the paired cards is compared. So in this case, a pair of
+aces would beat a pair of fives.
+
+For comparing values of cards, generally the ace are considered the highest,
+followed by the king, queen, jack, and 10 through 2 (in that order). Again,
+depending on how you designed your cards class above, doing this comparison may
+be fairly straightforward or more involved.
+
+Your task for this part of the warmup is as follows: **think about how this
+application changes the design of your cards class from above**. If it does,
+think about the specific changes you would make to how this class is
+composed. If it doesn't change your class at all, think about what parts of
+your class design works well for this application.
+
+Write your answer in the cell below.
+
+#### Solution
+
+```markdown
+Write your answer here.
+```
+
+## 6.1. A First Class Flight Sorter
+
+In this exercise, you will be reorganizing an existing set of code into an
+inheritance-based class structure. Specifically, we will be revisiting the
+flight schedule sorting problem from Worksheet 4.
+
+Your task is to implement three classes found in `flights.py`:
+
+* A class `FlightSorter` to serve as a generic base class. This class simply
+  has two methods, `__init__`, which takes a string representing a path to an
+  input file, and `write_sorted`, which takes a string representing a path to
+  an output file. These methods should do nothing.
+* A class called `PandasFlightSorter` that inherits from `FlightSorter` and
+  overrides the `__init__` and `write_sorted` methods using a Pandas-based
+  approach. The `__init__` method should simply load the data in the given file
+  into a data frame. The `write_sorted` method should sort the data frame and
+  write the sorted contents to the output file.
+* A class called `LineFlightSorter` that also inherits from `FlightSorter` and
+  overrides its methods to accomplish the same functionality as above, but
+  without using Pandas.
+
+To help you in this implementation, you may use either your own solution to
+Worksheet 4, or our sample solution, which has been included for you with this
+notebook as `flights_functions.py`.
+
+If your classes have been properly implemented, running `pytest` in this
+directory should result in all tests passing.
+
+## 6.2. MVC-ify Your Project
+
+For the main portion of today's worksheet, we'd like you to again look ahead to
+the final project for this course. Today, think about a possible project idea
+you'd like to pursue, and consider the ways in which you might design your
+software architecture in the MVC paradigm.
+
+This essentially involves answering the following questions:
+
+* What information will your system be keeping track of? (Model)
+* What will you display to the user, and how? (View)
+* What input will you get from your user, and how will you use this input?
+  (Controller)
+
+If you have time, start thinking about the methods you will use to do the above.
+This may include what the methods are intended to do, how the methods will
+interact, what types they will take as parameters, and what types they will
+return. You of course do not need to have this mapped out in detail today, but
+please note that as part of the final project, you will be doing an architecture
+review, and will need to have most or all of this written down to talk about.
+
+Remember that the project is fairly open-ended - the only requirement is that
+it's a significant piece of interactive software. It does not have to be
+structured using MVC, but we feel that answering the above questions will help
+you refine your project's architecture.
+
+Feel free to create additional cells below as you think through your idea.

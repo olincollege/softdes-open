@@ -1,0 +1,34 @@
+--- intake_survey.py	2023-02-01 04:59:04.111195 +0000
++++ intake_survey.py	2023-02-01 05:04:25.500129 +0000
+@@ -17,11 +17,14 @@
+ #   4 - Written a fair amount of code (e.g., a full program)
+ #   5 - Done a small programming project (100-500 lines of code)
+ previous_programming_experience = 3
+ 
+ # If necessary, please explain your programming experience.
+-previous_programming_description = "I wrote some MATLAB code in QEA, but I've never programmed in Python before."
++previous_programming_description = (
++    "I wrote some MATLAB code in QEA, but I've never programmed in Python"
++    " before."
++)
+ 
+ # Define your programming experience in Python as of this moment, on a scale of
+ # 1 to 5. You can use the same description for each number as above.
+ previous_python_experience = 1
+ 
+@@ -36,11 +39,14 @@
+ #   4 - Intermediate experience with both
+ #   5 - Intermediate experience with both, AND advanced experience with one
+ previous_tools_experience = 2
+ 
+ # If necessary, please explain your experience with the command line and Git.
+-previous_tools_description = "I know a few basic commands on the command line, like cd and ls, but nothing beyond that."
++previous_tools_description = (
++    "I know a few basic commands on the command line, like cd and ls, but"
++    " nothing beyond that."
++)
+ 
+ # What are your learning goals for this course? Please list at least one.
+ learning_goals = [
+     "I really want to learn to develop my own games this semester.",
+     "I'm interested in doing an engineering concentration in computing, and"

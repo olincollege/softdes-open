@@ -1,0 +1,522 @@
+---
+jupyter: python3
+execute:
+  enabled: false
+---
+
+# Assignment 1: Python Basics
+
+This assignment is intended to strengthen your knowledge of basic Python.
+
+As you work through this assignment, you may notice some of the helper functions
+provided to you use the `for` and `while` keywords. For now, you do not need to
+know what `for` and `while` do in detail; they will be explained in Reading 2.
+In short, these functions are both loops. `for` loops through all elements in an
+"iterable" data type (list, tuple, etc), and `while` loops while a condition
+remains true.
+
+## 0. Setup
+
+Before you start on the problems for this assignment, do the following setup
+steps.
+
+### 0.1. Convert Quarto Notebook
+
+As usual, you should convert this notebook into Jupyter format by running the
+following command from this directory:
+
+```
+quarto convert 1-python-basics.qmd
+```
+
+This will generate the file `1-python-basics.ipynb`.
+
+### 0.2. Read the Rubric
+
+In this course, it's helpful to take a look through the rubric for each
+assignment before you start and as you work through the problems.
+
+For each problem, the rubric provides a description of points you can expect to
+receive if your submission meets certain criteria. The criteria in the rubric is
+intended to give you a sense of what we will be looking for, and to ensure
+fairness and consistency in grading.
+
+Before starting work on this assignment, please skim through the rubric,
+`rubric-1.md`, to get a sense of how this assignment will be graded.
+
+### 0.3. Enable Auto-Reloading of Python Code
+
+Run the following cell, which will ensure that the latest version of your code
+is used each time you run a code cell in this notebook. If you ever restart your
+notebook, you should re-run this cell.
+
+```{python}
+%load_ext autoreload
+%autoreload 2
+```
+
+## 1. (Describe Function Here)
+
+In this first problem, you'll get some practice describing functions: what input
+they take, what they do, and what output they return. You'll do this by writing
+docstrings for a few functions.
+
+If you want to refresh your memory on how a docstring is formatted, see the
+[Docstrings section of Reading 1](https://softdes.olin.edu/docs/readings/1-python-basics/#docstrings).
+
+### 1.1. One Billion Seconds
+
+The file `billion.py` contains a function that shows you how many years and days
+are left until you are a billion seconds old.
+
+Write a docstring for the function `time_to_billion_seconds` in the file.
+
+For fun, you can run the function here with your age:
+
+```{python}
+from billion import time_to_billion_seconds
+
+# Set this to your age in years.
+age = 22.2
+
+time_to_billion_seconds(age)
+```
+
+## 1.2. Artificial...Intelligence?
+
+The file `baby_ai.py` contains a function that does some very basic math for
+you. Specifically, it takes two positive integers and a one-character string. If
+the string is `"+"`, the functions adds the two integers and returns the result,
+and if it is `"*"`, the function does the same thing but with multiplication. If
+the string isn't `"+"` or `"*"`, the function just returns -1.
+
+Write a docstring for this function, which is called `basic_calc`.
+
+For fun, you can run the function here with some test arguments:
+
+```{python}
+from baby_ai import basic_calc
+
+# Feel free to change this and run it with whatever values you choose.
+basic_calc(6, 7, "*")
+```
+
+## 2. Password Checker
+
+Passwords are, by far, the most commonly used form of authentication for
+software systems and services. Unfortunately, on their own, people tend to pick
+easily guessable passwords or reuse them across many services, making it easy to
+access online accounts without the real user's knowledge or authorization. In
+this problem, you will write some code for a password checker, which checks that
+a potential password will not be easily guessed.
+
+The file `password.py` contains all of the functions you will implement for this
+problem. Each function is pre-populated with a docstring, and has a line that
+simply says `pass`. You should replace these lines with your implementation in
+each function.
+
+### 2.1. Blocklisted Passwords
+
+For your first password checker, simply check that the input string (`password`)
+is not one of the three most common passwords: `123456`, `qwerty`, or
+`password`.
+
+Implement your checker in the function `not_common_password`. This function
+should return `True` if `password` is **not** one of those passwords, and it
+should return `False` if `password` is any of those.
+
+For fun, you can try out your function in the cell below:
+
+```{python}
+from password import not_common_password
+
+# Try different passwords below.
+not_common_password("hunter2")
+```
+
+### 2.2. Password Length
+
+For your next checker, make sure that `password` is between 6 and 16 characters
+long, inclusive.
+
+Implement your checker in the function `meets_length_restriction`. This function
+should return `True` if `password` is exactly 6 characters long, exactly 16
+characters long, or anywhere in between, and `False` otherwise.
+
+For fun, you can try out your function in the cell below:
+
+```{python}
+from password import meets_length_restriction
+
+# Try different passwords below.
+meets_length_restriction("hunter2")
+```
+
+### 2.3. Character Classes
+
+For this checker, make sure that `password` contains at least one character from
+each of the following classes:
+
+- Lowercase letters
+- Uppercase letters
+- Digits
+- Punctuation
+
+Implement your checker in the function `uses_all_character_classes`. This
+function should return `True` if `password` has one or more characters in each
+of the above classes and `False` otherwise.
+
+For convenience, we have made available four variables representing each of the
+four character classes:
+
+- `ascii_lowercase` is a string with all lowercase letters (`a` through `z`).
+- `ascii_uppercase` is a string with all uppercase letters (`A` through `Z`).
+- `digits` is a string with all digits (`0` through `9`).
+- `punctuation` is a string with all punctuation (you don't need to know what
+  specific characters they are for this problem).
+
+We have also provided a helper function,
+`count_occurrences_in_string(target, characters_to_count)`, which counts the
+number of characters in `target` that appear in `characters_to_count`. Feel free
+to call this function in your implementation.
+
+For fun, you can try out your function in the cell below:
+
+```{python}
+from password import uses_all_character_classes
+
+# Try different passwords below.
+uses_all_character_classes("hunter2")
+```
+
+### 2.4. Multiple Sets of Password Rules
+
+The classic XKCD comic on password strength provides an alternate way to pick
+stronger passwords:
+
+![Password strength (correct horse battery staple)](https://imgs.xkcd.com/comics/password_strength.png)
+
+_Source_: https://xkcd.com/936/
+
+The password `correct horse battery staple` would not pass all of the checks you
+wrote in the previous section - it does not contain any uppercase letters,
+digits, or punctuation. However, it wouldn't make sense to drop these rules for
+all passwords, only for passwords that are not a sequence of words. Essentially,
+if the password is long enough, you can reasonably assume that it is a sequence
+of words and not enforce rules on which types of characters the password
+contains.
+
+For this checker, then, check whether the password is _strictly_ longer than 16
+characters (this time, exactly 16 characters long doesn't cut it). Any passwords
+that meet this criterion are automatically accepted, and your checker should
+return `True`. If a password is shorter (up to 16 characters long), then check
+whether it meets **all three** of the criteria above (doesn't use the three
+common passwords, is between 6 and 16 characters, and has at least one character
+of each class) and return the result.
+
+Implement your checker in the function `long_enough_or_all_rules`. This function
+should return `True` if `password` is longer than 16 characters, or if it would
+pass all three other checkers you implemented for this problem, and `False`
+otherwise.
+
+For fun, you can try out your function in the cell below:
+
+```{python}
+from password import long_enough_or_all_rules
+
+# Try different passwords below.
+long_enough_or_all_rules("hunter2")
+```
+
+## 3. Let me `float` an idea by you...
+
+You may remember from the
+[reading](https://softdes.olin.edu/docs/readings/1-python-basics/#floating-point-numbers)
+that floats in Python can be a bit weird sometimes due to the way it represents
+floating-point numbers. In this problem, you'll get to write some code to
+convert the representation of floating-point numbers as binary bits (`1`s and
+`0`s) to a decimal number. By the end of this problem, you should have a
+function that you can use to convert a string of 32 binary bits, like
+`01000000010010001111010111000011`, to a number like 3.14.
+
+The file `floating_point.py` contains all of the functions that you will
+implement for this problem.
+
+### 3.1. Split the Bitstring
+
+The string of 32 bits (sometimes called a _bitstring_) first needs to be split
+up into three parts that are used in different stages of the conversion process.
+The are split up as follows:
+
+- `sign` should be the first bit in the bitstring.
+- `exponent` should be the next 8 bits in the bitstring.
+- `fraction` should be the remainder (23 bits) of the bitstring.
+
+Implement this in the function `split_bits`, which has been partially
+implemented for you. Use string slicing to get the correct parts of
+`bit_string`.
+
+For fun, you can try out your function in the cell below:
+
+```{python}
+from floating_point import split_bits
+
+# Replace this with 32 bits of your choice
+bit_string = "01000000010010001111010111000011"
+
+sign, exponent, fraction = split_bits(bit_string)
+print(f"Sign: {sign}")
+print(f"Exponent: {exponent}")
+print(f"Fraction: {fraction}")
+```
+
+### 3.2. Convert Exponent
+
+Once we have the bits of `exponent`, we need to convert this to an integer that
+we will use in the final step of the conversion process.
+
+For this conversion, we turn the bits of `exponent` into a binary integer, and
+then subtract 127. A binary integer is similar to a decimal integer, but based
+on successive powers of 2 instead of powers of 10. For example, the number 140
+in decimal can be written as
+
+$140 = 1 \times 10^2 + 4 \times 10^1 + 0 \times 10^0 = 1 \times 100 + 4 \times
+10$.
+
+Using a similar process, we could write this in binary as
+
+$140 = 1 \times 2^7 + 0 \times 2^6 + 0 \times 2^5 + 0 \times 2^4 + 1 \times
+2^3 + 1 \times 2^2 + 0 \times 2^1 + 0 \times 2^0 = 128 + 8 + 4$.
+
+Thus in binary, we would write 140 as `10001100`. So if the bits of `exponent`
+were `10001100`, we would convert this to 140 and subtract 127 to get 13.
+
+Implement this in the function `convert_to_power`. While this function has not
+been implemented at all, we have provided a function `binary_to_int` that you
+can use to convert a bitstring like `10001100` into an integer like 140.
+
+For fun, you can try out your function in the cell below:
+
+```{python}
+from floating_point import convert_to_power
+
+# This can be however long you want, but it's best to keep it at 8 bits.
+exponent = "10001100"
+
+convert_to_power(exponent)
+```
+
+### 3.3. Convert Fraction
+
+We need to also convert the bits of `fraction` into its own floating-point
+number that we will use in the final step of the conversion process.
+
+This step is similar to the one you did for converting the bits of `exponent`,
+except for two key differences:
+
+- Before converting to a binary integer, you need to add a 1 bit to the start of
+  the `fraction` bits, so if `fraction` were `00010001111010111000011`, you
+  would convert `100010001111010111000011`.
+- After converting, divide by $2^{23}$ and return the result.
+
+Implement this in the function `convert_to_significand`. Again, feel free to use
+the `binary_to_int` function to help you convert binary bits into an integer.
+
+For fun, you can try out your function in the cell below:
+
+```{python}
+from floating_point import convert_to_significand
+
+# This can be however long you want, but it's best to keep it at 23 bits.
+fraction = "00010001111010111000011"
+
+convert_to_significand(fraction)
+```
+
+### 3.4. Assemble the Float
+
+Now you are ready to put together all of the pieces to create a float. In this
+last function, you should start with a bitstring and use the functions you wrote
+above to go through the entire conversion process.
+
+Here are the rough steps for doing so:
+
+- Split the bitstring into its sign, exponent, and fraction parts.
+- Convert the exponent bits into a power (you could call this variable `power`).
+- Convert the fraction bits into a significand (you could call this variable
+  `significand`).
+- Multiply the significand by 2 raised to the `power`.
+- If the sign bit is 1, make the result negative.
+- Return the result as your float.
+
+Implement this in the function `interpret_as_float`.
+
+For fun, you can try out your function and see if a bitstring like
+`01000000010010001111010111000011` successfully converts to a float like 3.14.
+
+```{python}
+#| collapsed: false
+#| jupyter: {outputs_hidden: false}
+from floating_point import interpret_as_float
+
+# This can be however long you want, but it's best to keep it at 23 bits.
+bit_string = "01000000010010001111010111000011"
+
+interpret_as_float(bit_string)
+```
+
+Congratulations! You've just written code to do some pretty sophisticated
+computation, especially for your first week of learning software design!
+
+With your floats all assembled, this calls for a parade.
+
+## 4. Code Repair
+
+In this problem, you will practice reading and improving code written by others.
+
+The file `pricy_fall.py` defines a few variables and a function called
+`terminal_velocity`, which calculates and returns the terminal velocity of a
+falling sphere, starting from rest. This is the speed at which the sphere
+continues to fall if left on its own for long enough, which is when the force of
+gravity perfectly balances with the drag of the sphere as it falls through air.
+
+This function uses Euler's method to calculate the terminal velocity. The
+following is a step by step description of Euler's method, and closely tracks
+how the `terminal_velocity` function is implemented.
+
+1. Set up variables to keep track of the previous velocity and current velocity.
+   We use these to determine when the sphere has reached terminal velocity.
+2. The force of gravity will be constant throughout this process, so calculate
+   it once: $F_g = mg$, that is, the force of gravity $F_g$ is equal to the mass
+   of the sphere $m$ times the acceleration due to gravity $g$.
+3. If the sphere is falling, and the current velocity is within some threshold
+   of the previous velocity, the sphere is considered to be at terminal
+   velocity.
+4. Otherwise, we can prepare to update the velocity. First, set the previous
+   velocity to be the current velocity.
+5. Calculate the drag force acting on the sphere:
+   $F_D = \frac{1}{2}\rho v^2
+   C_D A$, that is, the drag force $F_D$ is equal
+   to half of the density of the air $\rho$ times the square of the velocity
+   $v$, times the drag coefficient $C_D$, times the cross-section area of the
+   sphere $A$.
+6. To calculate the new velocity, add the forces of gravity and drag together to
+   determine the net force acting on the sphere, then multiply this by the
+   timestep $dt$ and divide by the mass $m$ to determine how much the sphere's
+   velocity will change during the timestep. Add this change to the velocity.
+7. Go back to Step 3.
+
+Given this description, go through and update the variable names so that they
+are in line with our
+[variable name style guidelines](https://softdes.olin.edu/docs/readings/1-python-basics/#variable-name-style).
+
+Once you have done this, go through and fix any errors in the code. There may be
+a few errors in the code, which you can catch either by running the unit tests
+for this problem or by running the cell below:
+
+```{python}
+from pricy_fall import terminal_velocity
+
+terminal_velocity(1, 2, 0.1)
+```
+
+## 5. Resubmission Practice
+
+During this semester, you will get the chance to resubmit your work after making
+revisions based on our feedback. In this problem, you will practice that
+process.
+
+### 5.0. Commit Work
+
+To simulate a more realistic environment for resubmission, it will be useful to
+have a commit just for this problem. To do that, you should first take any
+existing work that you have and commit it. (It's okay if you have tests that
+don't pass or style errors in your code up to this point.) Run `git add` on any
+of the `.py` files you have changed up to this point, and then run `git commit`.
+Type a reasonable commit message, save, and then close the editor to finish your
+commit.
+
+Once you have committed your work up to this point, you can move on.
+
+### 5.1. Make Resubmission Changes
+
+This directory contains a directory called `0-intro-to-assignments` that
+represents a sample submission of Assignment 0. **Note that this is not your
+`0-intro-to-assignments` directory; this is one within this directory, and its
+rubric should show the grader and reviewer as Cass Apple and Chris Autopep,
+respectively.**
+
+In this directory, `rubric-0.md` is filled out with feedback from CAs. You also
+have three additional files:
+
+- `black.txt` shows the output of running the command `black --diff .` in your
+  submission folder. It tells you what changes it would make to your code to
+  reformat it properly.
+- `pylint.txt` shows the output of running the command `pylint *.py` in your
+  submission folder. It tells you any style errors that you have in your code.
+- `pytest.txt` shows the output of running the command `pytest` in your
+  submission folder. It tells you any unit tests that your code is failing.
+
+Based on the rubric and these three output files, make appropriate changes to
+address the grader feedback. This may involve deleting or changing files. You do
+not need to change any of the responses in the intake survey (but you may need
+to reformat the responses).
+
+### 5.2. Resubmit the Changes
+
+To resubmit your changes, you can mostly follow steps for the usual submission:
+
+1. Run black, pylint, and pytest on your code. If running pylint or pytest
+   report errors, you should fix them now.
+2. Use `git add` to stage any changes that you made. If you deleted files, such
+   as `foo.py`, you can use `git rm foo.py` to make sure that Git marks that
+   deletion as part of your commit.
+3. (This step differs from usual submission.) Run `git commit` to commit your
+   changes. Be sure to detail what you changed and why. See below for a sample
+   commit message template.
+
+Your commit message for a resubmission should describe what was changed. If your
+commit message does not describe a change, or is not specific enough, your
+changes may not be reviewed or regraded.
+
+Here is what a sample commit message _might_ look like:
+
+```
+Resubmit A0 and address unit test issues
+
+In the initial submission, Pytest reported errors because I listed my
+previous programming experience level as 0. The test required the level
+to be an integer between 1 and 5. Fix this line in the intake survey
+response.
+```
+
+Your header line should indicate that you are resubmitting the assignment and
+briefly summarize what you changed. In the following paragraphs, you can explain
+more about what changes you made and why.
+
+Once you have committed these changes, you are done with this problem. For a
+real resubmission, you will have to also run `git push`, copy the commit URL,
+and submit that URL on Canvas, but since this problem is just practice, you do
+not need to do these steps here.
+
+## 6. Submit
+
+Once you have finished this assignment, you can go ahead and submit!
+
+As a refresher, here is a summary of the steps you need to do to submit.
+
+1. Run unit tests on your code. You can do this by running `pytest` in this
+   directory, or by running tests in VSCode. Be sure to run tests for each file
+   you have changed.
+2. Autoformat your code with black. If you have configured VS Code to
+   automatically format your code on save, then you should be done, though you
+   may want to save each file you modified just in case. You can instead run
+   `black .` in this directory.
+3. Run Pylint on your code by running the command `pylint *.py` in this
+   directory.
+4. Fix any remaining style issues that Pylint catches in your code.
+5. Stage any changes that you have made to the code files. (**Other than these
+   files, you shouldn't stage any other changes, such as to this notebook.**)
+6. Commit your changes to your repository.
+7. Push your changes to GitHub.
+8. Submit your commit link on Canvas.

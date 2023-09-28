@@ -1,0 +1,515 @@
+---
+jupyter: python3
+execute:
+  enabled: false
+---
+
+# Assignment 3: Dictionaries, Recursion, and Refactoring
+
+In this assignment, you will get the chance to explore each of the major topics
+of this module - dictionaries, recursion, and refactoring - in more detail.
+
+As usual, convert your notebook before starting. Then, every time you start or
+restart your notebook, run the cell below to ensure your changes made in `.py`
+files will get pulled in.
+
+```{python}
+%load_ext autoreload
+%autoreload 2
+```
+
+## 1. Markov Text Generation
+
+A *Markov text generator* is a way of generating random but (somewhat) coherent
+text from an existing text. Essentially, a Markov text generator uses a *source
+text* (which can be only a few words, but is usually a larger text like a
+novel) to build a model of what words tend to follow each given word. It then
+uses this model to randomly select and build chains of words, forming
+sentences. (This is similar to how autocorrect and predictive text work on
+smartphones, but is based only on a single text.)
+
+For example, if we took a short source text, like \"I am Sam. I am Sam. Sam I
+am.\" (from Dr. Seuss's *Green Eggs and Ham*), a simple Markov text generator
+might end up generating a few sentences like this:
+
+```
+I am Sam. I am Sam. I am. Sam I am. Sam I am Sam.
+```
+
+As you can see, the generated text looks quite similar to the source text, but
+also contains a few sentences that don't appear in the source text. The text is
+generated using a *first-order Markov process*, which essentially means that
+the word generated at any point depends only on the word that came before it
+(except at the beginning of a sentence).
+
+In this exercise, you will implement a simple Markov text generator that
+produces sentences like this from *any* source text. Your code will be written
+in a file we have provided for you called `markov.py`. You can find the file in
+the same directory as this notebook.
+
+At the end of this exercise, you should be able to copy some text into a file
+and run your code on it to generate some fun sentences!
+
+### 1.1. Generate the Word List
+
+Typically, your source text will come from a long string representing the
+entire text. Since it would be unwieldy to deal with a string consisting of
+tens of thousands of words, we've provided you with a short source text to use
+(the "I am Sam" string seen above).
+
+Running the code cell below will set our sample source text to be the three "I
+am Sam" sentences with some formatting (as it might appear in the original book
+text).
+
+```{python}
+sample_source = "I am Sam.\n\nI am Sam.\nSam I am."
+```
+
+In this form, the string is a bit difficult to process into a model for Markov
+text generation, because we need to split it up into words. It would be great
+if we only had to deal with spaces, but as you can see in the string, there are
+other characters that in some ways act like spaces. The `\n` characters denote
+a line break, and two of them (`\n\n`) denote a paragraph break. For the
+purposes of building the Markov model, spaces, line breaks, and paragraph
+breaks all fall into the category of *whitespace* (characters that represent
+spacing of various sizes) and should be considered equivalent.
+
+Your first task is to turn the string `sample_source` into an ordered list of
+the words in the source text. You should break words based on whitespace and
+preserve all capitalization and punctuation in the words, so the list would
+begin like `[\"I\", \"am\", \"Sam.\", ...]` and continue through the entire
+text.
+
+To help you in this task, we will introduce you to a new built-in string method
+called `split`. This takes a string and splits it into a list of shorter
+strings based on a specific character or set of characters. Rather than explain
+how this function works, we are linking the
+[official
+documentation](https://docs.python.org/3/library/stdtypes.html#str.split)
+for the function. Read this documentation to determine how the function works,
+and then use it to fill in the body of the `build_word_list` function in the
+`markov.py` file. (You don't have to use `split`, but you might find it to be
+useful.)
+
+Once you have written the function, you can optionally run the cell below to
+see if your function properly creates and prints the list of words from the
+sample source text.
+
+```{python}
+from markov import build_word_list
+
+sample_words = build_word_list(sample_source)
+print(sample_words)
+```
+
+### 1.2. Build the Dictionary
+
+Your next task is to build the dictionary of "next words". Specifically, we
+mean that this dictionary should map a word to all of the words the follow that
+word in the source text.
+
+As an example, with the sample source text above, your dictionary should map
+`"I"` to `["am", "am", "am."]` Notice that the the final `"am."` has a period
+at the end of it, since that is how it appears in the source text. **Your
+dictionary should preserve the punctuation at the end of words.**
+
+You will also use your dictionary to keep track of the beginning and the end of
+sentences. For this exercise, you can assume that sentences will only end in a
+period (`.`), question mark (`?`), or an exclamation point (`!`). **Any word
+that ends in one of these punctuation marks should map to `[""]`, and any word
+that follows an ending word should be added to the list for `""`.** In our
+example above, this means that `"Sam."` and `"am."` should both map to `[""]`
+(notice that even though `"Sam."` ends two sentences, the list is still just
+one item long). It also means that `""` should map to the list `["I", "I",
+"Sam"]` (notice here that `"I"` appears multiple times since it begins multiple
+sentences).
+
+As a final example, this means that with the source text `"I am Sam. I am
+Sam. Sam I am."`, you should get the following dictionary:
+
+```
+{'': ['I', 'I', 'Sam'],
+ 'I': ['am', 'am', 'am.'],
+ 'am': ['Sam.', 'Sam.'],
+ 'Sam.': [''],
+ 'Sam': ['I'],
+ 'am.': ['']}
+```
+
+In `markov.py`, you will find the function `build_next_words`. Fill in this
+function with your code.
+
+When you are done, you can optionally run the cell below to see if your
+function returns the dictionary seen above.
+
+```{python}
+from markov import build_next_words
+sample_next_words = build_next_words(sample_words)
+print(sample_next_words)
+```
+
+### 1.3. Generate a Single Sentence
+
+Once you have the dictionary of next words, you can begin generating some
+text. For your next task, you will write a function that generates a single
+random sentence using your dictionary of next words. In `markov.py`, this
+function is called `generate_sentence` - fill in the body of this function.
+
+To generate a word, you will need to know the last word that was added to the
+sentence. (Remember we have a special value for the start of the sentence.)
+Your function should use this word to get a list of possible next words, and
+then randomly choose a word from that list. You can use the function
+`random.choice` to return a random element from a sequence - for example,
+`random.choice([1, 2, 3])` will randomly return one of the integers `1`, `2`,
+or `3`. Using this process, you should select and add words to your sentence
+until you have formed a complete sentence.
+
+Once you have completed this step, you can optionally run the cell below to see
+if your function returns a single sentence that resembles "I am Sam" or some
+variation on it.
+
+```{python}
+from markov import generate_sentence
+
+sample_sentence = generate_sentence(sample_next_words)
+print(sample_sentence)
+```
+
+### 1.4. Generate More Text
+
+For your final task, use your `generate_sentence` function to print multiple
+sentences, forming a complete text. In the `markov.py` file, fill in the body
+of the `generate_text` function. This function takes the dictionary of next
+words and a number of sentences to generate, and returns a string consisting of
+that many sentences of Markov-generated text.
+
+As you do this, be sure to avoid adding extra characters to your sentences. For
+example, the string `"I am. Sam I am Sam."` is different from `"I am. Sam I am
+Sam. "` (notice the space at the end of the second sentence).
+
+Once you have completed this step, you can optionally run your code below and
+verify that you get variations on the sentence `"I am Sam."`.
+
+```{python}
+from markov import generate_text
+
+sample_markov = generate_text(sample_next_words, 5)
+print(sample_markov)
+```
+
+## 2. The Art of Randomness
+
+In this problem, you will use the power of recursion to create random
+computational art. In the process of doing this, you will get to see an example
+of a fully-fledged Python script that can be run from the command line, as well
+as an external library in action ([Pillow](https://python-pillow.org/), used
+for image processing).
+
+### 2.0. Understand the Context
+
+You do not have to submit anything for this step - it is purely to help you
+understand the problem you will be working on.
+
+Here is a plot of the function $f(x, y) = \sin(10\pi xy)$:
+
+![Plot of the function with x and y each from -1 to 1](static/pi_plot.png)
+
+This is one example of *computational art*: a visually interesting work of art
+created using computing.
+
+We can add complexity to plots like these by randomly generating and combining
+functions. For example, we could take the average of a function that returns
+$\sin(10\pi xy)$ and a function that returns y, and get the following:
+
+$f(x, y) = \frac{\sin(10\pi xy) + y}{2}$
+
+Effectively, we are taking two randomly generated functions and further
+transforming them in various ways, such as by averaging them, multiplying them,
+or taking their sine. If we repeat this process, we can build up functions
+whose plots are less visually uniform:
+
+![Plot of a complex generated function with x and y each from -1 to 1](static/complex.png)
+
+The images above are in grayscale (shades of gray from pure white to pure
+black), but you could also generate color images this way. In digital images,
+it is common for pixels to have values of red, green, and blue, which together
+make up the color of that pixel. By generating these random functions for the
+red, green, and blue values of each pixel, we can create images like this:
+
+![A color image generated by combining random functions for the red, green, and blue values](static/rgb.png)
+
+Generating these images in Python relies on an external image processing
+library. We have provided the code that interacts with this library and takes
+care of most of the processing pipeline - your job is to provide code to
+generate the random functions used to set the colors of each pixel in the
+image.
+
+### 2.1. Generate Random Art
+
+This step is the main portion of this problem. While the description for this
+step is a bit long, it explains several important features that may be helpful
+as you implement your function, so please read it in its entirety.
+
+In the file `recursive_art.py`, you will find a function called
+`build_random_function`. Your first task is to write the docstring and
+implementation for `build_random_function`.
+
+To help you build these functions, we have provided you with four functions:
+
+* `average`: computes the average of two values.
+* `cosine`: computes the cosine of $\pi$ times a value.
+* `multiply`: computes the product of two values.
+* `sine`: computes the sine of $\pi$ times a value.
+
+We have also provided you with two base functions, `first` and `second`, which
+take two values and return the first or second of those values, respectively.
+
+#### Randomness
+
+Part of your function will involve randomly choosing an item of a list or an
+integer. To help you do this, we have made two functions from the `random`
+portion of the Python standard library available to you. The functions are as
+follows:
+
+* `choice`: choose a random element from a list. As an example, `choice([1, 2,
+  3])` might return 2.
+* `randrange`: choose a random integer in a specified range. The parameters are
+  exactly the same as for the `range` function, so `randrange(10)` would return
+  a randomly chosen integer from 0 to 9, inclusive.
+
+#### Function Depth
+
+The function itself takes two parameters, `min_depth` and `max_depth`, and
+returns a function of a specific depth. In this case, depth relates to the
+number of levels of "nesting" of mathematical functions before one of the base
+functions is returned. Here is a visual example:
+
+![Illustration of function depth](static/function.svg)
+
+This final function in this case would be `average(y, multiply(cosine(x), x))`,
+or mathematically:
+
+$f(x, y) = \frac{y + x \cos(\pi x)}{2}$
+
+With a higher depth, you will get more complex functions. The parameter
+`min_depth` specifies how many levels deep all parts of your function *must*
+be, while `max_depth` specifies how deep they *can* be.
+
+The depth is part of what determines whether you should make a recursive call
+to `build_random_function`. Between `min_depth` and `max_depth`, you should
+decide whether to continue nesting functions by "flipping a coin". That is,
+with a 50% chance, make another recursive call, and with a 50% chance, return
+one of the base functions instead.
+
+#### Inner Functions
+
+When you nest a function (i.e., go one level deeper), you should select a
+random function from the four that we have provided. Depending on whether this
+function has one parameter or two, you should then generate one or two
+"sub-functions" that will then be combined by the functions that you have
+chosen. For example, if you select `multiply` at random, then you should
+generate two sub-functions, and then multiply their result.
+
+`build_random_function` should return a **function**. To do this, you can
+return a function by its name, like `return cosine`, but to build up a function
+that combines sub-functions, you will need to define an *inner function*, like
+this:
+
+```python
+def build_random_function(min_depth, max_depth):
+    # Do some stuff here...
+
+    function =  # Randomly pick one of the four functions here
+    first_inner_function =  # Generate the inner function here
+    second_inner_function =  # Generate another inner function here
+
+    def random_function(x, y):
+        return  # Return the result of the function here
+
+    return random_function
+```
+
+Essentially, you define the inner function inside another function (for
+convenience, let's call this the outer function for now). When you do this, you
+have access to all variables defined in the outer function (including
+`function`, `first_inner_function`, and `second_inner_function`) and can use
+them as you define the inner function (i.e., you can use or otherwise call
+`function`, `first_inner_function`, and `second_inner_function` within the
+inner function).
+
+---
+
+Once you have implemented your function below, you can run the cell below to
+see what kinds of images your code generates. Feel free to adjust the
+dimensions of the image or the recursive depth.
+
+```{python}
+import numpy as np
+from matplotlib.pyplot import imshow
+from recursive_art import generate_image
+
+height = 350
+width = 350
+min_recursive_depth = 7
+max_recursive_depth = 9
+
+%matplotlib inline
+random_art = generate_image(height, width, min_recursive_depth,
+                            max_recursive_depth)
+imshow(np.asarray(random_art))
+```
+
+If you really like the image you see above and want to save it, you can do so
+by running the code cell below. (Adjust the filename as necessary.)
+
+```{python}
+filename = "portfolio/jupyter.jpg"
+random_art.save(filename)
+```
+
+### 2.2. Save Your Artwork
+
+Once you have implemented `build_random_function`, you should be able to
+generate and save image files containing your randomly generated artwork. To do
+this, you can run a command like this from this directory:
+
+```bash
+$ python recursive_art.py portfolio/random.jpg
+```
+
+This will create and save an image generated with your code at the path
+`portfolio/random.jpg`. (This file is named `random.jpg` and located in the
+`portfolio` directory. There is currently an empty file there, but running the
+above command will replace it.)
+
+**At a minimum, you should run your code to replace the file
+`portfolio/random.jpg`.** If you want to choose a different width, height,
+minimum recursive depth, or maximum recursive depth, you can do so like this:
+
+```bash
+$ python recursive_art.py portfolio/random.jpg --width 500 --height 500 --min-depth 5 --max-depth 7
+```
+
+You can replace the numbers above to change the arguments passed to the
+functions in `recursive_art.py`. (You can also run the command `python
+recursive_art.py -h` or `python recursive_art.py --help` to )
+
+Feel free to generate any other files that you would like, and add them to your
+repository. That being said, we strongly recommend that you do not add any
+images larger than a few MB, as in extreme cases this can slow down your Git
+repository **permanently**.
+
+Once you have generated at least one image file, you are done! Enjoy some more
+[random images](https://picsum.photos/) (this should be fine, but browse at
+your own risk).
+
+## 3. Alternatives for Alternative Voting
+
+Almost all elections in the United States are decided by a system called
+*first-past-the-post* voting - everyone votes for a single candidate, and
+whoever gets the most votes wins. Unfortunately, a bit of mathematics and game
+theory can show that first-past-the-post voting has some serious flaws in the
+long term, as excellently explained in this CGP Grey's video
+["The Problems with First Past the Post Voting Explained"](https://www.youtube.com/watch?v=s7tWHJfhiyo).
+
+For this problem, you will be using Python to **refactor an existing
+implementation of an alternative voting system**, which goes by a number of
+names, commonly *instant runoff voting*. This voting system is also explained
+in Grey's video
+["The Alternative Vote Explained"](https://www.youtube.com/watch?v=3Y3jE3B8HsE)
+as *alternative voting*.
+
+In this problem, you will imagine a vote for class president among Jordan,
+Morgan, Robin, and Sam. You will be given votes that are in a list of lists,
+like this:
+
+```
+[["Sam", "Morgan", "Jordan", "Robin"],
+ ["Sam", "Robin", "Jordan"],
+ ["Jordan", "Morgan"],
+ ...]
+```
+
+Each vote ranks the possible candidates from most to least preferred, but as
+you can see, not all candidates have to be ranked. Then, candidates with the
+least support are successively eliminated, and votes for that candidate are
+transferred to other candidates. This process continues until a single
+candidate has more than 50% of the votes.
+
+The Alternative Vote video above explains how this process works in more
+detail, but here is a written description of the voting process:
+
+1. Go through all of the votes and count one vote for each person's
+   *highest-ranked candidate remaining in the race*. (At the beginning, this is
+   just everyone's first choice, but in later rounds, a person's most preferred
+   candidates may have already been eliminated.) If all of a person's preferred
+   candidates have been eliminated, that person's vote is not counted.
+2. If anyone has more than a 50% majority, that person is *immediately*
+   declared the winner - no further work is required. Note that this majority
+   is of the total votes that were cast *in this round* - if all of a person's
+   candidates were eliminated, their vote is not included in the total number
+   of votes.
+3. Otherwise, find the candidate with the *fewest* votes and eliminate them
+   from the running.
+4. Repeat this process until the winner is chosen. This process is *guaranteed*
+   to eventually choose a winner, since as votes "transfer" to other
+   candidates, someone will eventually get more than 50% of the votes.
+
+If you want to see a written, fully worked-out example of this process, you can
+take a look at Wikipedia's description of
+[a fictional vote on the Tennessee state capital](https://en.wikipedia.org/wiki/Instant-runoff_voting#Tennessee_capital_election).
+
+### 3.1. Refactor Recursively
+
+The file `vote.py` contains a function `hold_alternative_vote(candidates,
+ranked_votes)`, implemented using an iterative approach. (The
+`hold_iterative_vote` function is a copy of this starter implementation, in
+case you need it again.) The parameter `candidates` is a list of strings
+representing the candidates' names - in the above class president example, this
+would be `["Jordan", "Morgan", "Robin", "Sam"]`. The parameter `ranked_votes`
+is a list of lists representing each voter's ranked votes for the candidates,
+as shown in the class president example above. The function returns a tuple of
+two items: (1) a string representing the name of the winning candidate, and (2)
+the number of votes they got when they were declared the winner.
+
+For this step, your task is to refactor this function so that it uses
+recursion. To determine how this implementation might look, it may help to use
+a recursive problem-solving approach:
+
+* Identify the base case in which this problem can be solved easily. Remember,
+  the base case should be a situation in which whatever "work" you do in the
+  next step does not need to be done - you may need to do some processing of
+  the input data before you check for your base case.
+* Identify the recursive case in which you call the function on a smaller
+  version of the problem. The single transferable voting process has a fairly
+  straightforward way of making this problem smaller - if you are stuck, you
+  should read the description of the process from the previous
+  assignment. Remember, generating smaller and smaller versions of this problem
+  should eventually lead you to the base case in the first step.
+
+Your solution **must** be recursive - that is, the `hold_alternative_vote`
+function must call itself.
+
+There isn't a code cell for you to test your implementation in, but running
+`pytest` will check whether the results of your implementation are equal to
+those of the original implementation.
+
+### 3.2. Noisrucer: Reflect on Recursion
+
+Take a few moments to reflect on the solution you just wrote and on the
+iterative solution you started with. While you do not need to finish Part 1 of
+this problem to complete this part, you should be able to articulate how these
+approaches felt for you.
+
+In the file `vote-report.md`, write a paragraph stating which approach you
+found easier to understand and why. There are many possible reasons for why you
+might have found one easier than the other - you have the benefit of having the
+iterative solution already, and if that made a big difference, you should
+mention so. But remember that there can be other factors at play as well, such
+as how intuitive the problem-solving approach felt to you or your comfort with
+the specific features of Python you used in each solution.
+
+## 4. Submission
+
+Check the rubric for which files need to be added. Then follow the usual process
+to stage, commit, and submit your work.

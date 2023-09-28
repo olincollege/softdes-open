@@ -1,0 +1,272 @@
+---
+jupyter: python3
+execute:
+  enabled: false
+---
+
+# Worksheet 1.2: More Python Basics
+
+This is the second part of Worksheet 1. In general, you can expect the
+worksheets for this course to be split into parts, each of which takes place
+during a class meeting.
+
+After completing this worksheet, you should be able to:
+
+- Write well-styled Python code with appropriately precise variable names and
+  without "magic numbers" that hurt code maintainability.
+- Write Python functions with properly formatted and detailed docstrings.
+- Implement code that branches among more than two possible paths using an
+  `if`/`elif`/`else` statement.
+- Slice strings in a variety of ways.
+- Reading a function to determine its parameter types and return type.
+- Debugging some more subtle errors in Python code.
+- Submit a worksheet for this course using the appropriate steps.
+
+## 0. Setup
+
+As with the previous worksheet, you should first convert this `.qmd` file into a
+Jupyter notebook. To do so, run the following command:
+
+```
+quarto convert 1-2-more-python-basics.qmd
+```
+
+Once you have done that, you should have a file called
+`1-2-more-python-basics.ipynb`. Open that file in VS Code.
+
+## 1. Programming Practice
+
+First, let's warm up our programming minds by trying a few practice problems.
+
+### 1.1. Penultimate
+
+Below is a function called `tens`. It takes a positive integer and returns the
+digits in the tens place. So:
+
+- `tens(42)` would return 4.
+- `tens(123)` would return 2.
+- `tens(2)` would return 0.
+
+Implement this function. You may find it helpful to use the `%` and `//`
+[operators](https://softdes.olin.edu/docs/readings/1-python-basics/#integers-and-arithmetic-operators).
+
+```{python}
+def tens(number):
+    pass  # Replace this line with your code.
+```
+
+If you want to try running the function, you can do so here:
+
+```{python}
+tens(42)
+```
+
+### 1.2. Digital Logic
+
+Below is a function called `gate`. It takes a positive integer called `number`
+and does the following:
+
+- If the tens digit of `number` is 1, it prints the ones digit of `number`. So
+  `gate(17)` would print `7`.
+- If the tens digit of `number` is 2, it prints the negative of the ones digit
+  of `number`. So `gate(21)` would print `-1`.
+- If the tens digit of `number` is 3, it prints the ones digit of `number`,
+  plus 10. So `gate(34)` would print `14`.
+- If the tens digit of `number` is 4, it prints the negative of the ones digit
+  of `number`, minus 10. So `gate(42)` would print `-12`.
+- Otherwise, it prints `0`. So `gate(57)` would print `0`.
+
+Implement this function using an `if`/`elif`/`else` statement.
+
+```{python}
+def gate(number):
+    pass  # Replace this line with your code.
+```
+
+If you want to try running the function you can do so here:
+
+```{python}
+gate(17)
+```
+
+### 1.3. Slice It Up
+
+[Slicing strings](https://softdes.olin.edu/docs/readings/1-python-basics/#indexing-and-slicing)
+to get only a portion of their characters can be a useful skill when working
+with strings, particularly if you have a large amount of data that follows a
+specific format (like a grid of characters). While slicing strings is not
+something you are likely to do with general text strings, writing string slices
+is often a good way to exercise your programming and problem-solving skills.
+
+In the code cell below, you will see a string called `source_string`, followed
+by a few calls to the `print` function. Each of those lines has a comment that
+says what the `print` call should print. Use string slicing on `source_string`
+to ensure that each line prints out the right string. You can run the cell to
+see the output.
+
+```{python}
+source_string = "String slicing FTW!"
+
+print(source_string[0])  # This should print "F"
+print(source_string[0])  # This should print "slicing FTW!"
+print(source_string[0])  # This should print "FTW!"
+print(source_string[0])  # This should print "String slicing FTW"
+print(source_string[0])  # This should print "!WTF gnicils gnirtS"
+print(source_string[0])  # This should print "WTF"
+print(source_string[0])  # This should print "tnscgT"
+```
+
+## 2. Stylish Python
+
+Writing Python code with good style is easier than ever - you can usually set
+autoformatters like black or linters like Pylint to run automatically every time
+you save your code, which helps you quickly find and fix style errors in code.
+Though it doesn't affect the correctness of the code at all, good code style is
+important because it easier for others to understand, use, or modify your code
+in the future. (It also makes it easier for your future self - just wait until
+you try to understand code you wrote 6 months ago.)
+
+In this problem we'll try to iteratively improve the style of a piece of code.
+Specifically, you'll first improve the variable names in the code, then
+eliminate "magic numbers" that make code hard to maintain. Finally, you'll write
+a docstring for the function in the code to explain what it does to others.
+
+### 2.0. Code
+
+In the cell below, you will see a snippet of Python code. It is written twice -
+you should edit the code on the **bottom**. The top cell is just in case you
+need to go back to the original code easily.
+
+So don't edit any code here:
+
+```python
+where = "MA"
+
+def t(p, c):
+    if c == "Groceries":
+        return p
+    if c == "Prepared food":
+        return p * 1.0625
+    if c == "Prescription drug":
+        return p
+    if c == "Non-prescription drug":
+        return p * 1.0625
+    if c == "Clothing":
+        if p < 175:
+            return p
+        return p + 0.0625 * (p - 175)
+    if c == "Intangibles":
+        return p
+    if c == "Feminine Hygiene":
+        return p
+    return p * 1.0625
+```
+
+Instead, this is the cell you should edit:
+
+```{python}
+where = "MA"
+
+def t(p, c):
+    if c == "Groceries":
+        return p
+    if c == "Prepared food":
+        return p * 1.0625
+    if c == "Prescription drug":
+        return p
+    if c == "Non-prescription drug":
+        return p * 1.0625
+    if c == "Clothing":
+        if p < 175:
+            return p
+        return p + 0.0625 * (p - 175)
+    if c == "Intangibles":
+        return p
+    if c == "Feminine Hygiene":
+        return p
+    return p * 1.0625
+```
+
+For all of the tasks in this problem, you should edit the code above.
+
+### 2.1. Variable Names
+
+![How legend handles became feet](https://i.redd.it/pwcv7ddhd8k81.jpg)
+
+To start, the variable names in this code cell are not particularly clear. From
+reading the code, you might be able to figure out what is going on. (As a hint,
+if `where` were instead set to `"RI"`, the `1.0625` would be `1.07` and the
+`175` would be `250`. If `where` were set to `"DE"`, then the function body
+would just be `return p`.)
+
+Figure out what the code does, then fix the variable names to be more precise.
+
+### 2.2. Magic Numbers
+
+You may notice that the number `1.0625` appears a fair bit in the above code.
+Suppose that we wanted to change the value of `"MA"` to `"RI"`, the `1.0625` to
+`1.07`, the `0.0625` to `0.07`, and the `175` to `250`. This would require
+changing many values in the code, and if you missed any one of them, the code
+would not work as intended. Others who read your code might not understand what
+this number represents and have a hard time understanding your code. Thus, these
+numbers are appropriately called "magic numbers".
+
+To fix this problem in the code, you should assign the above numbers to a
+variable (which you only need to do once), and then use that variable throughout
+your code. If you do this, then the variable name can communicate some
+information about what the value represents, and to change the value, you only
+need to change that value in one spot.
+
+In the code cell, make these changes as appropriate.
+
+### 2.3. Docstrings
+
+Now that you have renamed your variables and fixed the problems of the magic
+numbers, you should document your code to make its meaning even clearer to those
+who might read it in the future (including yourself). In the function that was
+originally called `t(p, c)`, add a docstring explaining:
+
+- What the function does, with additional details as necessary.
+- The type and meaning of each parameter (`p` and `c` in the original code).
+- The type and meaning of the return value of the function.
+
+You may find
+[our explanation of docstrings](https://softdes.olin.edu/docs/readings/1-python-basics/#docstrings)
+helpful.
+
+Once you have made these changes in the code cell, you are done with this
+problem! Nice work.
+
+## 3. Submission
+
+Now that you have completed the coding in the worksheet, all that is left to do
+is to submit this and the previous worksheet.
+
+First, **make sure that you have saved your Jupyter notebook** (the `.ipynb`
+file). Once you have done this, run the following commands one at a time (**copy
+and paste these commands to avoid losing work**):
+
+```
+quarto convert 1-1-first-steps-python.ipynb
+quarto convert 1-2-more-python-basics.ipynb
+```
+
+This will convert your Jupyter notebooks back into Quarto notebooks (`.qmd`)
+files. The `.ipynb` files will still be there, but you should not commit them.
+
+Now, following the procedure you saw at the end of Assignment 0, `git add` the
+two `.qmd` files you just generated, `1-1-first-steps-python.qmd` and
+`1-2-more-python-basics.qmd`.
+
+Run `git status` and **make sure that it shows both of these files under
+"Changes to be committed"**. If you do not see this, it is likely that the
+`.qmd` files did not actually change, which means something went wrong in the
+conversion step above. We recommend you ask for help in this case.
+
+Once you have properly added the files, you can commit. Try to write a
+reasonably descriptive commit message, containing at least the fact that you are
+submitting Worksheets 1.1 and 1.2.
+
+Finally, follow the rest of the assignment submission process: push these
+changes to your GitHub repository (`origin`), find the commit URL, and submit
+that on Canvas.

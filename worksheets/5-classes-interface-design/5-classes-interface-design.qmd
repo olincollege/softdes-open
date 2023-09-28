@@ -1,0 +1,461 @@
+---
+jupyter: python3
+execute:
+  enabled: false
+---
+
+# Worksheet 5: Classes and Interface Design
+
+This worksheet is intended to give you some practice in working with
+classes. You may find it helpful to have
+[Reading 5](https://softdes.olin.edu/docs/readings/5-classes-interface-design/)
+handy as you do this.
+
+## 1. A First Date
+
+To start, let's write a class to represent a calendar date. Here is some
+starter code:
+
+```{python}
+class Date:
+    """
+    Your docstring here.
+    """
+
+    def __init__(self, month, day, year):
+        """
+        Your docstring here.
+        """
+        pass
+
+    def __repr__(self):
+        """
+        Your docstring here.
+        """
+        pass
+
+    def is_leap_year(self):
+        """
+        Your docstring here.
+        """
+        pass
+
+    def is_valid_date(self):
+        """
+        Your docstring here.
+        """
+        pass
+```
+
+As you go through each part of this exercise, you will write and test one part
+of the `Date` class. By writing your own class, you will have effectively added
+a new type in Python that you can use in your programs.
+
+### 1.1. Starting with `__init__`
+
+![A joke about init](init.jpg)
+
+Implement the
+[`__init__` method](https://softdes.olin.edu/docs/readings/5-classes-interface-design/#the-__init__-method)
+for the `Date` class. As a reminder, the `__init__` method (called a
+*constructor* in many other programming languages) is used to create a new
+*instance* of a `Date`, that is, an object that represents a specific date.
+
+This takes integers representing a month, day, and year and stores them in the
+class instance. Specifically, the method assigns the values of `month` to
+`self.month`, and similarly with other parameters. This sets the *instance
+attributes* of the `Date` instance, that is, variables that belong to and live
+within a specific date.
+
+You should also write a brief docstring for this method in the space indicated.
+
+When you have done this, you should be able to see the correct information by
+running the following code cell.
+
+```{python}
+# December 24, 1991 - release of Python 0.9.4.
+python_release = Date(12, 24, 1991)
+
+print(f"The month is {python_release.month}")
+print(f"The day is {python_release.day}")
+print(f"The year is {python_release.year}")
+```
+
+### 1.2. Dates, Represent!
+
+Implement the
+[`__repr__`
+method](https://softdes.olin.edu/docs/readings/5-classes-interface-design/#the-__repr__-method)
+for the `Date` class. This method is used to determine what happens when you
+call the `print` function on a `Date` instance, and returns a string. You
+should return the date as month/day/year, so January 20, 2021 would be printed
+as `1/20/2021`.
+
+Again, write a brief docstring for this method in the space provided.
+
+When you have done this, you should be able to re-run the cell above containing
+the class code, and then print a date using the following code cell.
+
+```{python}
+# March 14, 2021 - the most recent Pi Day
+pi_day = Date(3, 14, 2021)
+
+print(f"Pi Day is {pi_day}")
+```
+
+### 1.3. Leaping into More Methods
+
+It can sometimes be helpful to calculate whether or not a date is in a leap
+year. A year divisible by 4 is *usually* a leap year, but there are exceptions:
+
+> Every year that is exactly divisible by four is a leap year, except for years
+> that are exactly divisible by 100, but these centurial years are leap years
+> if they are exactly divisible by 400. For example, the years 1700, 1800, and
+> 1900 are not leap years, but the years 1600 and 2000 are.
+
+Implement the `is_leap_year` method for the `Date` class, which returns `True`
+if the year stored by the `Date` instance is in a leap year and `False`
+otherwise. (You do not need to check whether the date is otherwise valid for
+now.) Write a brief docstring for this method as well.
+
+When you have done this, you should be able to re-run the cell above containing
+the class code, and then run the following cell to check whether leap years are
+correctly calculated.
+
+```{python}
+def check_leap_year(date):
+    """
+    Print whether a date is a leap year or not.
+
+    Args:
+        date: A Date instance representing the date to check.
+    """
+    if date.is_leap_year():
+        print(f"{date} is a leap year")
+    else:
+        print(f"{date} isn't a leap year")
+
+
+recent_leap_date = Date(1, 1, 2020)
+check_leap_year(recent_leap_date)
+
+recent_non_leap = Date(1, 1, 2021)
+check_leap_year(recent_non_leap)
+
+century_leap_date = Date(1, 1, 1600)
+check_leap_year(century_leap_date)
+
+century_non_leap = Date(1, 1, 1700)
+check_leap_year(century_non_leap)
+
+future_non_leap = Date(1, 1, 2200)
+check_leap_year(future_non_leap)
+```
+
+### 1.4. Thirty Days Hath September
+
+At the moment, there is no checking of the actual date values you use to create
+a `Date` instance, so you could create a "date" that doesn't make sense, like
+January 100th. Or this:
+
+![December 32, 2020](2020.jpg)
+
+As a first step in fixing this issue, we will create a variable used to keep
+track of how many days each month has. Since the number of days in a month is
+the same, we can share this variable across all `Date` instances. We can create
+a
+[*class attribute*](https://softdes.olin.edu/docs/readings/5-classes-interface-design/#class-attributes)
+to do this, which is a variable that belongs to the `Date` class as a whole,
+rather than to a specific date.
+
+Create a dictionary called `days` in the `Date` class as a class
+attribute. (See the reading for how to do this.) This dictionary should map
+each month's value (e.g., `1` for January or `2` for February) to the number of
+days the month has (`31` for January and `28` for February). You do not need to
+count leap years, so February should have 28 days.
+
+To remember how many days are in each month, you could use the following rhyme:
+
+> Thirty days hath September,
+> April, June, and November,
+> All the rest have thirty-one,
+> But February's twenty-eight,
+> The leap year, which comes once in four,
+> Gives February one day more.
+
+When you have done this, the following code cell should print out the correct
+number of days in each month:
+
+```{python}
+print(f"January has {Date.days[1]} days")
+print(f"February has {Date.days[2]} days")
+print(f"March has {Date.days[3]} days")
+print(f"April has {Date.days[4]} days")
+print(f"May has {Date.days[5]} days")
+print(f"June has {Date.days[6]} days")
+print(f"July has {Date.days[7]} days")
+print(f"August has {Date.days[8]} days")
+print(f"September has {Date.days[9]} days")
+print(f"October has {Date.days[10]} days")
+print(f"November has {Date.days[11]} days")
+print(f"December has {Date.days[12]} days")
+```
+
+### 1.5. Let's ValiDATE
+
+With all of this built up, we can now write a method to check whether a date is
+valid. Implement the `is_valid_date` method in the `Date` class. This should
+check whether the month is between 1 and 12 (inclusive) and whether the day is
+between 1 and the number of days in that month. For leap years, make sure that
+February is considered to have 29 days.
+
+When you have done this, running the following code cell should correctly print
+whether each date is valid or not.
+
+```{python}
+def check_valid(date):
+    """
+    Print whether a date is valid or not.
+
+    Args:
+        date: A Date instance representing the date to check.
+    """
+    if date.is_valid_date():
+        print(f"{date} is a valid date")
+    else:
+        print(f"{date} isn't a valid date")
+
+
+# Standard valid date.
+check_valid(Date(1, 1, 2000))
+
+# Standard invalid date.
+check_valid(Date(1, 32, 2000))
+
+# Leap day in a non-leap year.
+check_valid(Date(2, 29, 2001))
+
+# Leap day in a leap year.
+check_valid(Date(2, 29, 2000))
+
+# Leap day in centurial non-leap year.
+check_valid(Date(2, 29, 1800))
+
+# Invalid date on a month with 30 days.
+check_valid(Date(4, 31, 2020))
+
+# Negative year (should be valid).
+check_valid(Date(3, 14, -4))
+
+# Negative month.
+check_valid(Date(-4, 2, 2001))
+
+# Negative day.
+check_valid(Date(1, -1, 2001))
+```
+
+### 1.6. Document the `Date`
+
+To finish off this exercise, write a
+[class
+docstring](https://softdes.olin.edu/docs/readings/5-classes-interface-design/#class-docstrings)
+for `Date`. This should contain a brief description of the class and what it
+represents, as well as a list of each attribute (both class and instance
+attributes), along with its type and what it stands for.
+
+Once you have done this, you are all set for this exercise!
+
+## 2. Tic-Tac
+
+In this next exercise, you will get started in designing a class to represent a
+tic-tac-toe game. For this exercise, you do not need to write any code, but
+sketching out some code for yourself will be very helpful, as you will need to
+implement this game for the assignment.
+
+A game of tic-tac-toe mostly involves the following operations:
+
+* Set up a new game of tic-tac-toe.
+* Print out the current state of the board.
+* Figure out who the next player to move is (X or O).
+* Mark a square with the current player's symbol.
+* Check whether a player has won or not.
+
+These operations can be combined to run a full game. In code, the class would
+look like this (and this the starter code you will be given for the
+assignment):
+
+```python
+class TicTacToeBoard:
+
+    def __init__(self):
+        pass
+
+    def __repr__(self):
+        pass
+
+    def next_move(self):
+        pass
+
+    def mark(self, row, col):
+        pass
+
+    def check_win(self, player):
+        pass
+```
+
+Answer each of the following short questions below. (There are quite a few, but
+they all require relatively short answers.)
+
+### 2.1. First Player
+
+Which player will go first, `X` or `O`?
+
+#### Solution
+
+```markdown
+Your solution goes here.
+```
+
+### 2.2. Board Format
+
+How will you represent the squares of the board? Specifically, what type will
+you use to represent the squares, and why?
+
+#### Solution
+
+```markdown
+Your solution goes here.
+```
+
+### 2.3. Symbols
+
+How will you represent each player's symbol (`X` or `O`)? What about a blank
+square?
+
+#### Solution
+
+```markdown
+Your solution goes here.
+```
+
+### 2.4. Next Move
+
+How will you determine which player is the next to move? Describe your approach
+in whatever way is easiest for you to express (you can use code, but you don't
+have to).
+
+#### Solution
+
+```markdown
+Your solution goes here.
+```
+
+### 2.5. Attributes
+
+So far, you have a few attributes to consider in your class:
+
+* The board
+* The next player to move
+* The symbol of each player
+* The symbol to represent a blank square
+
+Which of these attributes will be
+[public or
+private](https://softdes.olin.edu/docs/readings/5-classes-interface-design/#private-or-public-attributes)?
+Why?
+
+Which of these attributes will be
+[class
+attributes](https://softdes.olin.edu/docs/readings/5-classes-interface-design/#class-attributes)
+instead of instance attributes? Why?
+
+#### Solution
+
+```markdown
+Your solution goes here.
+```
+
+### 2.6. Valid and Invalid Moves
+
+How will you determine if an attempted move in the game is valid or invalid?
+
+#### Solution
+
+```markdown
+Your solution goes here.
+```
+
+### 2.7. Determining a Horizontal Win
+
+Note that your answers for Questions 2.7-2.9 should depend on the format you
+chose for your board in Question 2.2.
+
+How will you determine whether or not a player has won in the horizontal case?
+Visually, a board in this state might look like this:
+
+```
++-+-+-+
+| | | |
++-+-+-+
+|X|X|X|
++-+-+-+
+| | | |
++-+-+-+
+```
+
+Describe your approach in whatever way is easiest for you to express (you can
+use code, but you don't have to).
+
+#### Solution
+
+```markdown
+Your solution goes here.
+```
+
+### 2.8. Determining a Vertical Win
+
+How will you determine whether or not a player has won in the vertical case?
+Visually a board in this state might look like this:
+
+```
++-+-+-+
+| |O| |
++-+-+-+
+|X|O|X|
++-+-+-+
+| |O| |
++-+-+-+
+```
+
+Describe your approach in whatever way is easiest for you to express (you can
+use code, but you don't have to).
+
+#### Solution
+
+```markdown
+Your solution goes here.
+```
+
+### 2.9. Determining a Diagonal Win
+
+How will you determine whether or not a player has won in the diagonal case?
+Visually a board in this state might look like this:
+
+```
++-+-+-+
+|X|O| |
++-+-+-+
+|O|X|O|
++-+-+-+
+| |O|X|
++-+-+-+
+```
+
+Describe your approach in whatever way is easiest for you to express (you can
+use code, but you don't have to).
+
+#### Solution
+
+```markdown
+Your solution goes here.
+```
